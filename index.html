@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="referrer" content="no-referrer">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Archive Lineage Web</title>
+<title>Collection Lineage Web</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -16,26 +16,30 @@
   --bg:#f2f4ee; --surface:#ffffff; --ink:#1c241d; --muted:#5b665c; --line:#d4dacf;
   --mine:#5a3d97; --mine-ink:#ffffff; --archive:#ece6f7; --archive-line:#8a73bd;
   --offsite:#dcefe9; --offsite-line:#3f8d7a; --unknown:#eceeea; --unknown-line:#9aa39b;
-  --hl:#c7741c; --edge:#9aa59b;
+  --hl:#c7741c; --edge:#9aa59b; --own:#b5521f; --own-ink:#ffffff;
   --f-display:"Space Grotesk",system-ui,sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#141814; --surface:#1d231e; --ink:#e6ebe4; --muted:#9aa69b; --line:#323b33;
   --mine:#9b7ee0; --mine-ink:#120d1d; --archive:#2a2438; --archive-line:#9b85cf;
   --offsite:#183029; --offsite-line:#5fb39e; --unknown:#252a26; --unknown-line:#6d776e;
-  --hl:#f0a24a; --edge:#5b665c; color-scheme:dark}}
+  --hl:#f0a24a; --edge:#5b665c; --own:#e0844f; --own-ink:#1a0e07; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#141814; --surface:#1d231e; --ink:#e6ebe4; --muted:#9aa69b; --line:#323b33;
   --mine:#9b7ee0; --mine-ink:#120d1d; --archive:#2a2438; --archive-line:#9b85cf;
   --offsite:#183029; --offsite-line:#5fb39e; --unknown:#252a26; --unknown-line:#6d776e;
-  --hl:#f0a24a; --edge:#5b665c; color-scheme:dark}
+  --hl:#f0a24a; --edge:#5b665c; --own:#e0844f; --own-ink:#1a0e07; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
 .wrap{max-width:1240px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:20px}
 header h1{font-family:var(--f-display);font-weight:700;font-size:clamp(28px,4.2vw,42px);line-height:1.05;margin:0;letter-spacing:-.01em;text-wrap:balance}
 header p{margin:8px 0 0;color:var(--muted);max-width:68ch}
 .kicker{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips{display:grid;gap:8px}
+.chiprow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip.brd{font-weight:600;background:transparent;border-color:transparent;padding-left:2px;color:var(--muted)}
+.chip.brd:hover{color:var(--ink)}
+.chip.brd[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink);padding-left:11px}
 .chip{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer}
 .chip:hover{border-color:var(--mine)}
 .chip[aria-pressed="true"]{background:var(--mine);color:var(--mine-ink);border-color:var(--mine)}
@@ -63,6 +67,8 @@ header p{margin:8px 0 0;color:var(--muted);max-width:68ch}
 .n text{fill:var(--ink);font:500 13px var(--f-body);dominant-baseline:central;text-anchor:middle;pointer-events:none}
 .n.unknown text{fill:var(--muted)}
 .n.mine text{fill:var(--mine-ink);font-weight:600}
+.n.own rect{fill:var(--own);stroke:var(--own)}
+.n.own text{fill:var(--own-ink)}
 .n{cursor:pointer}
 .n:hover rect,.n:focus rect{stroke:var(--hl);stroke-width:2.5}
 .n:focus{outline:none}
@@ -91,7 +97,7 @@ ul{margin:6px 0;padding-left:18px} li{margin:3px 0}
 .bfill{height:100%;background:var(--mine);border-radius:5px}
 .num{font-variant-numeric:tabular-nums;font-family:var(--f-mono);font-size:12.5px;text-align:right;color:var(--muted)}
 .tablewrap{overflow-x:auto}
-table{border-collapse:collapse;font-size:13.5px;width:100%;min-width:640px}
+table{border-collapse:collapse;font-size:13.5px;width:100%;min-width:760px}
 th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 td.m{font-family:var(--f-mono);font-size:12.5px}
@@ -103,9 +109,9 @@ td.m{font-family:var(--f-mono);font-size:12.5px}
 <body>
 <div class="wrap">
 <header>
-  <div class="kicker">Archive Seed Bank · 15 strains · traced to founders</div>
-  <h1>Archive Lineage Web</h1>
-  <p>Each tree reads top to bottom: oldest ancestors first, your strain last. Pick a strain to see its pedigree, or open the full web to see how they all connect. Tap any box to jump to that strain's own tree.</p>
+  <div class="kicker">32 strains · 9 breeders · traced to founders</div>
+  <h1>Collection Lineage Web</h1>
+  <p>Each tree reads top to bottom: oldest ancestors first, your strain last. Pick a strain to see its pedigree, tap a breeder name to see that breeder's web, or open the full web to see how everything connects. Tap any box to jump to that strain's own tree.</p>
 </header>
 
 <div class="chips" id="chips" role="group" aria-label="Your strains"></div>
@@ -113,6 +119,7 @@ td.m{font-family:var(--f-mono);font-size:12.5px}
 <div class="bar">
   <div class="legend">
     <span><i class="sw" style="background:var(--mine);border-color:var(--mine)"></i>Your strain</span>
+    <span><i class="sw" style="background:var(--own);border-color:var(--own)"></i>Your own cross</span>
     <span><i class="sw" style="background:var(--archive);border-color:var(--archive-line)"></i>Archive ancestor</span>
     <span><i class="sw" style="background:var(--offsite);border-color:var(--offsite-line)"></i>Other breeder</span>
     <span><i class="sw" style="background:var(--unknown);border-color:var(--unknown-line);border-style:dashed"></i>Dead end (parents unknown)</span>
@@ -133,65 +140,68 @@ td.m{font-family:var(--f-mono);font-size:12.5px}
 
   <section class="panel">
     <h2>Breeding read</h2>
-    <h3>Moonbow share (expected % of genome)</h3>
+    <h3>Bridges between your Archive and non-Archive strains</h3>
+    <ul>
+      <li><b>OGKB / GSC</b> is the big shared root. It runs through all 14 Archive strains and also Truffle Alert, Cross of the Titans (via Mendo Breath and Grateful Breath) and Sour Trop (via Tropicana Cookies).</li>
+      <li><b>Zkittlez</b> links Icy OG (via Icy Grape) to the Archive Moonbow line, so <b>Fish Sticks</b> carries a little Archive-adjacent background.</li>
+      <li><b>Dosidos</b> shows up outside Archive in Truffle Alert, via White Truffle → Gorilla Butter → Peanut Butter Breath.</li>
+      <li><b>Chemdog</b> ties Sour Trop, Cross of the Titans, Watermelon Hashplant and the (GG4 x I-95) x Chemdog S1.</li>
+      <li><b>GG4</b> ties (GG4 x I-95) x Chemdog S1, Truffle Alert and Money Tree.</li>
+      <li><b>Cinderella 99</b> ties Golden Pineapple, Golden PuTang and Money Tree (via Jilly Bean → Space Queen).</li>
+      <li><b>Star Pupil / Pakistani</b> tie Golden PuTang and Valedictorian. <b>Tangie</b> ties Golden PuTang and Sour Trop.</li>
+    </ul>
+
+    <h3>Your own crosses</h3>
+    <ul>
+      <li><b>Fish Sticks</b> (Blue Tuna x Icy OG): the parents share no known ancestors. That is a true outcross, so expect a lot of variation in the F1 and vigor.</li>
+      <li><b>Bubble PAK</b> (Bubble Gum x Medi Pak): also a clean outcross. Bubble Gum candy plus Pakistani hashplant structure.</li>
+      <li>Most different from the Archive block: Laos Landrace, Salmon Creek Big Bud F2, Blue Tuna, Bubble PAK, Medi Pak, Valedictorian, Meigs OG. None share a known ancestor with the Archive strains.</li>
+    </ul>
+
+    <h3>Moonbow share, Archive strains</h3>
     <div class="bars" id="mbbars"></div>
-    <p class="note">Moonbow = Zkittlez x Dosidos, Archive's backbone. Computed from the tree (50% per parent, 100% through a selection).</p>
+    <p class="note">Moonbow = Zkittlez x Dosidos. Expected % of genome from the tree (50% per parent, 100% through a selection). Non-Archive strains are 0% except Icy OG, Fish Sticks and Truffle Alert, which get only distant Zkittlez or Dosidos.</p>
 
-    <h3>Shared ancestors that matter</h3>
+    <h3>Within Archive</h3>
     <ul>
-      <li><b>Moonbow 112 F2 #60</b> (one male) sits behind 11 of your 15: Oishii, Ichibo and Moonbow 112 IX directly, and everything built on Oishii.</li>
-      <li><b>Oishii</b> is a parent or grandparent of 9 of the other 14: Ichiban, Bingo!, Circle Jerk, Zwoosh/Zumo, Nubo, Wraith, Nu Walka, Lemon Venom, Ichibo.</li>
-      <li><b>Ichiban → Nubo</b> is a second hub: Nubo feeds Wraith, Zumo and Nu Walka.</li>
-      <li><b>Dosidos / Face Off OG</b> are in 14 of 15. Only Biscotti lacks them.</li>
+      <li><b>Moonbow 112 F2 #60</b> (one male) sits behind 11 of the 14 Archive strains. <b>Oishii</b> is a parent or grandparent of 9.</li>
+      <li>Closest pairs: Ichibo x Oishii, Ichibo x Lemon Venom, Moonbow 112 IX x Oishii (about 75% shared).</li>
+      <li>Best outcrosses for the Moonbow-heavy group: any non-Archive strain above, or Nu Walka / Wraith (about 9% Moonbow).</li>
     </ul>
-
-    <h3>Closest pairs (line-breeding territory)</h3>
-    <ul>
-      <li>Ichibo x Oishii, Ichibo x Lemon Venom, Moonbow 112 IX x Oishii: about 75% shared background</li>
-      <li>Ichibo x Ichiban, Moonbow 112 IX x Ichibo, Moonbow 112 IX x Dream Machine / Crazy Hazey: about 69%</li>
-      <li>Good for stabilizing a trait (F2/BX), expect more uniformity and some inbreeding depression risk</li>
-    </ul>
-
-    <h3>Best outcross options</h3>
-    <ul>
-      <li><b>Biscotti</b> shares only deep GSC / OG Kush roots with the rest. Biscotti x Moonbow 112 IX, Oishii or Ichibo gives the most hybrid vigor.</li>
-      <li><b>Nu Walka</b> and <b>Wraith</b> are only about 9% Moonbow. Strong partners for the Moonbow-heavy group (Moonbow 112 IX, Oishii, Ichibo, Crazy Hazey).</li>
-      <li>Lowest overlap overall: Nu Walka x Biscotti, then Nu Walka x Dream Machine / Crazy Hazey / Moonbow 112 IX.</li>
-    </ul>
-    <p class="note">Caveat: Nu Diesel, DogWalker OG, Super Runtz, Albert Walker and Lemon Peel have no published parents. If any carry OG Kush or Zkittlez (likely for some), real overlap is higher than shown.</p>
+    <p class="note">Caveat: Nu Diesel, DogWalker OG, Super Runtz, Albert Walker, Lemon Peel, I-95, Medi Haze, Tuna Kush and Poison Potion have no published parents, so hidden overlap is possible.</p>
   </section>
 </div>
 
 <section class="panel">
   <h2>Lineage table</h2>
   <div class="tablewrap"><table>
-    <thead><tr><th>Strain</th><th>Cross</th><th>Flower</th><th>Aroma</th></tr></thead>
+    <thead><tr><th>Strain</th><th>Breeder</th><th>Cross</th><th>Flower</th><th>Aroma</th></tr></thead>
     <tbody id="tbody"></tbody>
   </table></div>
-  <p class="note">Notes: "Crazy Haze" is listed by Archive as Crazy Hazey. "Oishi" is Oishii. Circle Jerk has no Archive page; its cross comes from a resale listing. Biscotti is a Cookies strain, not an Archive release. Flavor Pack lineage is from SeedFinder and not confirmed by Archive.</p>
+  <p class="note">Notes: "Crazy Haze" is listed by Archive as Crazy Hazey. "Oishi" is Oishii. Circle Jerk has no Archive page; its cross comes from a resale listing. Biscotti is a Cookies strain, not an Archive release. Flavor Pack lineage is from SeedFinder and not confirmed by Archive. Golden Pineapple: you listed (C99 x White Widow) x PuTang, but SeedFinder lists Golden Pineapple as C99 x White Widow and Golden PuTang as Golden Pineapple x PuTang; the tree follows SeedFinder. Medusa follows your note (Pure Kush x Mendo Breath), not Nirvana's Medusa. Cross of the Titans is a Bred by 42 strain: Best Shit Ever x Clash of the Titans. White Truffle, GG4, Mendo Breath, Peanut Butter Breath and Jilly Bean parents are widely reported rather than breeder-confirmed.</p>
 </section>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
 <script>
-const A='archive',O='offsite',U='unknown';
+const A='archive',O='offsite',U='unknown',W='own';
 const N=[
 // mine
-['wraith','Wraith',A,1,'','','Ghost OG x Nubo','https://archiveseedbank.com/products/wraith'],
-['zumo','Zumo',A,1,'','','Zwoosh x Nubo','https://archiveseedbank.com/products/zumo'],
-['nubo','Nubo',A,1,'','','Nu Diesel x Ichiban','https://archiveseedbank.com/products/nubo'],
-['lemonvenom','Lemon Venom',A,1,'','','Tahiti Lime x Ichiban','https://archiveseedbank.com/products/lemon-venom'],
-['nuwalka','Nu Walka',A,1,'','','DogWalker OG x Nubo','https://archiveseedbank.com/products/nu-walka'],
-['ichibo','Ichibo',A,1,'','','Ichiban #8 x Moonbow 112 F2 #60','https://archiveseedbank.com/products/ichibo'],
-['ichiban','Ichiban',A,1,'58-65 days','Earthy, dank eucalyptus-oil funk','Toad Venom (Becky) x Oishii','https://archiveseedbank.com/products/ichiban-toad-venom-x-oishii'],
-['bingo','Bingo!',A,1,'60-72 days','Purple Indica fragrance: lavender, floral, plum','Zilla x Oishii','https://archiveseedbank.com/products/bingo-zilla-x-oishii'],
-['lemonheads2','Lemonheads v2',A,1,'56-65 days','Fuely, chemmy kush, lemon peel, cleaner','(Dogwalker x Lemon Peel) x Planet Purple F2','https://archiveseedbank.com/products/lemonheads-v2'],
-['circlejerk','Circle Jerk',A,1,'60-70 days','Not listed','Super Runtz x Oishii (per Strainly resale listing; no Archive page found)','https://strainly.io/en/listings/509379-archive-seedbank-circle-jerk'],
-['mb112ix','Moonbow 112 IX',A,1,'63-72 days','Blackberry, currant, zingy lime, Zkittles','Moonbow #112 F1 x Moonbow #112 F2 #60','https://archiveseedbank.com/products/moonbow-112-ix'],
-['crazyhazey','Crazy Hazey',A,1,'Not listed','Gassy halitosis hashplant funk, zingy astringent sativa','(Big Sur Holy Weed x Face Off OG) x Moonbow #75. Your "Crazy Haze"; Archive lists it as Crazy Hazey','https://archiveseedbank.com/products/crazy-hazey'],
-['dreammachine','Dream Machine',A,1,'Not listed','Skunky Christmas wreath, pine sol, electric citrus','(Albert Walker x Zkittles #5) x Planet Purple F2 #144','https://archiveseedbank.com/products/dream-machine'],
-['oishii','Oishii',A,1,'63-70 days','Perfumed incense, potpourri skunk. Archive: "essentially a Moonbow backcross"','Flavor Pack #7 x Moonbow 112 F2 #60','https://archiveseedbank.com/products/oishii'],
-['biscotti','Biscotti',O,1,'','','Gelato #25 x Sour Florida OG (Cookies). Not an Archive release; Archive uses it as a parent (White Gold, Scotti-Faced)','https://seedfinder.eu/en/strain-info/biscotti/cookie-fam-genetics/genealogy'],
+['wraith','Wraith',A,1,'','','Ghost OG x Nubo','https://archiveseedbank.com/products/wraith','Archive Seed Bank'],
+['zumo','Zumo',A,1,'','','Zwoosh x Nubo','https://archiveseedbank.com/products/zumo','Archive Seed Bank'],
+['nubo','Nubo',A,1,'','','Nu Diesel x Ichiban','https://archiveseedbank.com/products/nubo','Archive Seed Bank'],
+['lemonvenom','Lemon Venom',A,1,'','','Tahiti Lime x Ichiban','https://archiveseedbank.com/products/lemon-venom','Archive Seed Bank'],
+['nuwalka','Nu Walka',A,1,'','','DogWalker OG x Nubo','https://archiveseedbank.com/products/nu-walka','Archive Seed Bank'],
+['ichibo','Ichibo',A,1,'','','Ichiban #8 x Moonbow 112 F2 #60','https://archiveseedbank.com/products/ichibo','Archive Seed Bank'],
+['ichiban','Ichiban',A,1,'58-65 days','Earthy, dank eucalyptus-oil funk','Toad Venom (Becky) x Oishii','https://archiveseedbank.com/products/ichiban-toad-venom-x-oishii','Archive Seed Bank'],
+['bingo','Bingo!',A,1,'60-72 days','Purple Indica fragrance: lavender, floral, plum','Zilla x Oishii','https://archiveseedbank.com/products/bingo-zilla-x-oishii','Archive Seed Bank'],
+['lemonheads2','Lemonheads v2',A,1,'56-65 days','Fuely, chemmy kush, lemon peel, cleaner','(Dogwalker x Lemon Peel) x Planet Purple F2','https://archiveseedbank.com/products/lemonheads-v2','Archive Seed Bank'],
+['circlejerk','Circle Jerk',A,1,'60-70 days','Not listed','Super Runtz x Oishii (per Strainly resale listing; no Archive page found)','https://strainly.io/en/listings/509379-archive-seedbank-circle-jerk','Archive Seed Bank'],
+['mb112ix','Moonbow 112 IX',A,1,'63-72 days','Blackberry, currant, zingy lime, Zkittles','Moonbow #112 F1 x Moonbow #112 F2 #60','https://archiveseedbank.com/products/moonbow-112-ix','Archive Seed Bank'],
+['crazyhazey','Crazy Hazey',A,1,'Not listed','Gassy halitosis hashplant funk, zingy astringent sativa','(Big Sur Holy Weed x Face Off OG) x Moonbow #75. Your "Crazy Haze"; Archive lists it as Crazy Hazey','https://archiveseedbank.com/products/crazy-hazey','Archive Seed Bank'],
+['dreammachine','Dream Machine',A,1,'Not listed','Skunky Christmas wreath, pine sol, electric citrus','(Albert Walker x Zkittles #5) x Planet Purple F2 #144','https://archiveseedbank.com/products/dream-machine','Archive Seed Bank'],
+['oishii','Oishii',A,1,'63-70 days','Perfumed incense, potpourri skunk. Archive: "essentially a Moonbow backcross"','Flavor Pack #7 x Moonbow 112 F2 #60','https://archiveseedbank.com/products/oishii','Archive Seed Bank'],
+['biscotti','Biscotti',O,1,'','','Gelato #25 x Sour Florida OG (Cookies). Not an Archive release; Archive uses it as a parent (White Gold, Scotti-Faced)','https://seedfinder.eu/en/strain-info/biscotti/cookie-fam-genetics/genealogy','Cookies Fam'],
 // intermediates
 ['zwoosh','Zwoosh',A,0,'49-58 days','Tropical candy funk, rare potpourri skunk','Zkittlez x Oishii','https://archiveseedbank.com/products/zwoosh-1'],
 ['tahitilime','Tahiti Lime',A,0,'60-67 days','Tropical starburst lime, skunky Moonbow side','Moonbow #25 x Lemon Lime Line','https://archiveseedbank.com/products/tahiti-lime'],
@@ -229,12 +239,98 @@ const N=[
 ['zilla','Zilla',O,0,'','','Purple Indica x Skunk/Haze (Archive Bingo! page)',''],
 ['purpleindica','Purple Indica',U,0,'','','Founder',''],
 ['skunkhaze','Skunk/Haze',U,0,'','','Founder',''],
-['hpk','Hollywood Pure Kush',U,0,'','','Pure Kush selection (SeedFinder, "probably")',''],
+['hpk','Hollywood Pure Kush',O,0,'','','Pure Kush selection (SeedFinder, "probably")',''],
 ['superruntz','Super Runtz',U,0,'','','Parentage not confirmed',''],
 ['bshw','Big Sur Holy Weed',U,0,'','','Legendary California sativa; no documented parents',''],
 ['albertwalker','Albert Walker',U,0,'','','Clone-only; genetics unknown (Leafly)',''],
 ['gelato25','Gelato #25',O,0,'','','Gelato pheno: Sunset Sherbet x Thin Mint GSC (SeedFinder)',''],
 ['sourflorida','Sour Florida OG',O,0,'','','OG Kush (South Florida) cut',''],
+// ===== non-Archive collection =====
+['sourtrop','Sour Trop',O,1,'63-75 days','','Sour Diesel V2 x Tropicana Cookies','','Oni Seed Co'],
+['crosstitans','Cross of the Titans',O,1,'65+ days','','Best Shit Ever x Clash of the Titans (Medusa x Pegasus)','https://seedfinder.eu/en/strain-info/cross-of-the-titans/bred-by-42/genealogy','Bred by 42'],
+['gg4i95chem','(GG4 x I-95) x Chemdog S1',O,1,'','','(GG4 x I-95) x Chemdog S1','','Unknown breeder'],
+['scbb','Salmon Creek Big Bud F2',O,1,'','','Salmon Creek Big Bud x Salmon Creek Big Bud (Big Bud BX line)','https://seedfinder.eu/en/strain-info/salmon-creek-big-bud/copa-genetics','Copa Genetics'],
+['trufflealert','Truffle Alert',O,1,'','','White Truffle (BeLeaf cut) x Poison Potion (Ian MOB)','','Copa Genetics'],
+['icyog','Icy OG',O,1,'','','Icy Grape x Ancient OG F2 Purple Stem Male','','Copa Genetics'],
+['meigsog','Meigs OG',O,1,'','','Meigs Gold x Ancient OG F2 Purple Stem Male','https://seedfinder.eu/en/strain-info/meigs-og/copa-genetics','Copa Genetics'],
+['goldenputang','Golden PuTang',O,1,'about 65 days','Pineapple, sour orange, skunky gas','Golden Pineapple x PuTang (MassMedical x Green Bodhi collab)','https://seedfinder.eu/en/strain-info/golden-putang/massmedicalstrains','Mass Medical'],
+['laos','Laos Landrace',O,1,'','','Muang Sing highland tribe landrace (no parents, it is a founder)','','Mass Medical'],
+['wmhp','Watermelon Hashplant',O,1,'','','Chem 91 clone x Watermelon Hashplant','','Mass Medical'],
+['valedictorian','Valedictorian',O,1,'','','Star Pupil x Weapon X','','Mass Medical'],
+['medipak','Medi Pak',O,1,'','','Medi Haze x Swabi Pakistani','https://seedfinder.eu/en/strain-info/medi-pak/massmedicalstrains','Mass Medical'],
+['goldenpineapple','Golden Pineapple',O,1,'','','C99 x White Widow (Green Bodhi, per SeedFinder). You listed it as (C99 x White Widow) x PuTang, which SeedFinder calls Golden PuTang','','Mass Medical'],
+['bluetuna','Blue Tuna',O,1,'','','Blue Dream x Tuna Kush (per seed vendor listing)','https://dcseedexchange.com/product/blue-tuna-blue-dream-x-tuna-kush-12-regular-seeds/','Hazeman Seeds'],
+['moneytree','Money Tree',O,1,'','','3Thirteen GG4 cut x TGA Jilly Bean','','Brisco\'s Beans'],
+['fishsticks','Fish Sticks',W,1,'','','Blue Tuna x Icy OG','','Andrew Moch'],
+['bubblepak','Bubble PAK',W,1,'','','Bubble Gum x Medi Pak','','Andrew Moch'],
+// ancestors
+['sourdieselv2','Sour Diesel V2',O,0,'','','Oni Seed Co version of Sour Diesel; exact cross not published',''],
+['sourdiesel','Sour Diesel',O,0,'','','Original Diesel x DNL (SeedFinder)',''],
+['origdiesel','Original Diesel',O,0,'','','Chemdog x (Mass Super Skunk x Sensi NL) (SeedFinder)',''],
+['dnl','DNL',U,0,'','','Founder',''],
+['massskunknl','Mass Super Skunk x Sensi NL',U,0,'','','Founder',''],
+['tropcookies','Tropicana Cookies',O,0,'','','GSC x Tangie (Oni Seed Co)',''],
+['tangie','Tangie',O,0,'','','California Orange x (Skunk x unknown) (DNA Genetics)',''],
+['calorange','California Orange',U,0,'','','Founder',''],
+['skunk','Skunk',U,0,'','','Founder',''],
+['bestshitever','Best Shit Ever',U,0,'','','Founder (Bred by 42 parent)',''],
+['clashtitans','Clash of the Titans',O,0,'','','Medusa x Pegasus',''],
+['medusa','Medusa',O,0,'','','Pure Kush x Mendo Breath (your info)',''],
+['purekush','Pure Kush',U,0,'','','Founder',''],
+['mendobreath','Mendo Breath',O,0,'','','OGKB x Mendo Montage (Gage Green)',''],
+['mendomontage','Mendo Montage',U,0,'','','Founder',''],
+['pegasus','Pegasus',O,0,'about 60 days','Fruit and floral','Grateful Breath x (Purple Elephant x (Grape Stomper x Aloha White Widow)) (Gage Green)','https://seedfinder.eu/en/strain-info/pegasus/gage-green-genetics/genealogy'],
+['gratefulbreath','Grateful Breath',O,0,'','','OGKB (Cherry Pie Kush cut) x Joseph (Gage Green)',''],
+['joseph','Joseph',U,0,'','','Founder',''],
+['pe_gsaww','Purple Elephant x (Grape Stomper x Aloha WW)',O,0,'','','Gage Green breeding line',''],
+['purpleelephant','Purple Elephant',O,0,'','','Purple Urkle x unknown',''],
+['purpleurkle','Purple Urkle',U,0,'','','Founder',''],
+['gs_aww','Grape Stomper x Aloha WW',O,0,'','','',''],
+['grapestomper','Grape Stomper',O,0,'','','Purple Elephant x Chemdog Sour Diesel',''],
+['alohaww','Aloha White Widow',U,0,'','','98 Aloha WW x Black Widow; treated as founder',''],
+['gg4i95','GG4 x I-95',O,0,'','','',''],
+['gg4','GG4 (Gorilla Glue #4)',O,0,'','','Chem\'s Sister x Sour Dubb x Chocolate Diesel (widely reported)',''],
+['gg4src','Chem\'s Sister / Sour Dubb / Choc Diesel',U,0,'','','Founders (accidental hermie cross)',''],
+['i95','I-95',U,0,'','','Top Dawg Seeds; parents not confirmed',''],
+['chemdog','Chemdog',U,0,'','','Founder (1991 bagseed origin)',''],
+['chemdogs1','Chemdog S1',O,0,'','','Chemdog selfed',''],
+['chem91','Chem 91',O,0,'','','Chemdog cut',''],
+['bigbud','Big Bud',U,0,'','','Founder',''],
+['whitetruffle','White Truffle (BeLeaf)',O,0,'','','Gorilla Butter pheno (widely reported)','https://seedfinder.eu/en/strain-info/white-truffle-s1/beleaf-cannabis/genealogy'],
+['gorillabutter','Gorilla Butter',O,0,'','','GG4 x Peanut Butter Breath (widely reported)',''],
+['pbb','Peanut Butter Breath',O,0,'','','Dosidos x Mendo Breath (Thug Pug, widely reported)',''],
+['poisonpotion','Poison Potion (Ian MOB)',U,0,'','','Parents not found',''],
+['icygrape','Icy Grape',O,0,'','','(Zkittlez x Purple Punch) x Black Domina 1996 (Copa / SeedFinder)','https://seedfinder.eu/en/strain-info/icy-grape/copa-genetics/genealogy'],
+['zpp','Zkittlez x Purple Punch',O,0,'','','SMMJ "Purple Skittles" cut',''],
+['purplepunch','Purple Punch',U,0,'','','Larry OG x Granddaddy Purple; treated as founder',''],
+['blackdomina','Black Domina 1996',U,0,'','','Sensi Seeds; founder',''],
+['aogpsm','Ancient OG F2 PSM',O,0,'','','Purple Stem Male selection from Ancient OG F2 (Copa)',''],
+['ancientog','Ancient OG',O,0,'','','Iran x Snow Lotus (Bodhi)',''],
+['iran','Iran',U,0,'','','Landrace founder',''],
+['snowlotus','Snow Lotus',U,0,'','','Founder (Bodhi)',''],
+['meigsgold','Meigs Gold',U,0,'','','Ohio heirloom; parents not found',''],
+['putang','PuTang',O,0,'about 60 days','Orange / tangerine with grape skunk','Star Pupil x Tangie (Mass Medical)','https://seedfinder.eu/en/strain-info/pu-tang/massmedicalstrains'],
+['starpupil','Star Pupil',O,0,'about 9 weeks','Perfume, grape, purple, skunky','Thai x (Afghani x Pakistani) (Mass Medical)','https://seedfinder.eu/en/strain-info/star-pupil/massmedicalstrains'],
+['thai','Thai',U,0,'','','Landrace founder',''],
+['afghanipak','Afghani x Pakistani',O,0,'','','',''],
+['afghani','Afghani',U,0,'','','Landrace founder',''],
+['pakistani','Pakistani',U,0,'','','Landrace founder',''],
+['wmhpparent','Watermelon Hashplant (parent)',U,0,'','','Parent line; origin not found',''],
+['weaponx','Weapon X',O,0,'','','Mendo Purps x Pakistani',''],
+['mendopurps','Mendo Purps',U,0,'','','Founder',''],
+['medihaze','Medi Haze',U,0,'','','Mass Medical; parents not found',''],
+['swabi','Swabi Pakistani',U,0,'','','Landrace founder',''],
+['c99','Cinderella 99',U,0,'','','Founder',''],
+['whitewidow','White Widow',U,0,'','','Founder',''],
+['bluedream','Blue Dream',O,0,'','','Blueberry x Haze',''],
+['blueberry','Blueberry',U,0,'','','Founder',''],
+['haze','Haze',U,0,'','','Founder',''],
+['tunakush','Tuna Kush',U,0,'','','Parents not found',''],
+['jillybean','Jilly Bean (TGA)',O,0,'','','Orange Velvet x Space Queen',''],
+['orangevelvet','Orange Velvet',U,0,'','','Founder',''],
+['spacequeen','Space Queen',O,0,'','','Romulan x Cinderella 99 (TGA)',''],
+['romulan','Romulan',U,0,'','','Founder',''],
+['bubblegum','Bubble Gum',U,0,'','','Indiana Bubblegum line; founder',''],
 ];
 const E=[ // child, parent, kind
 ['wraith','ghostog'],['wraith','nubo'],
@@ -275,31 +371,82 @@ const E=[ // child, parent, kind
 ['zilla','purpleindica'],['zilla','skunkhaze'],
 ['gelato25','sunsetsherbet'],['gelato25','gsc'],
 ['sourflorida','ogkush','sel'],
+['hpk','purekush','sel'],
+['sourtrop','sourdieselv2'],['sourtrop','tropcookies'],
+['sourdieselv2','sourdiesel','dash'],
+['sourdiesel','origdiesel'],['sourdiesel','dnl'],
+['origdiesel','chemdog'],['origdiesel','massskunknl'],
+['tropcookies','gsc'],['tropcookies','tangie'],
+['tangie','calorange'],['tangie','skunk'],
+['crosstitans','bestshitever'],['crosstitans','clashtitans'],
+['clashtitans','medusa'],['clashtitans','pegasus'],
+['medusa','purekush'],['medusa','mendobreath'],
+['mendobreath','ogkb'],['mendobreath','mendomontage'],
+['pegasus','gratefulbreath'],['pegasus','pe_gsaww'],
+['gratefulbreath','ogkb'],['gratefulbreath','joseph'],
+['pe_gsaww','purpleelephant'],['pe_gsaww','gs_aww'],
+['purpleelephant','purpleurkle'],
+['gs_aww','grapestomper'],['gs_aww','alohaww'],
+['grapestomper','purpleelephant'],['grapestomper','sourdiesel'],
+['gg4i95chem','gg4i95'],['gg4i95chem','chemdogs1'],
+['gg4i95','gg4'],['gg4i95','i95'],
+['gg4','gg4src'],
+['chemdogs1','chemdog','sel'],
+['chem91','chemdog','sel'],
+['scbb','bigbud','sel'],
+['trufflealert','whitetruffle'],['trufflealert','poisonpotion'],
+['whitetruffle','gorillabutter','sel'],
+['gorillabutter','gg4'],['gorillabutter','pbb'],
+['pbb','dosidos'],['pbb','mendobreath'],
+['icyog','icygrape'],['icyog','aogpsm'],
+['meigsog','meigsgold'],['meigsog','aogpsm'],
+['icygrape','zpp'],['icygrape','blackdomina'],
+['zpp','zkittlez'],['zpp','purplepunch'],
+['aogpsm','ancientog','sel'],
+['ancientog','iran'],['ancientog','snowlotus'],
+['goldenputang','goldenpineapple'],['goldenputang','putang'],
+['putang','starpupil'],['putang','tangie'],
+['starpupil','thai'],['starpupil','afghanipak'],
+['afghanipak','afghani'],['afghanipak','pakistani'],
+['wmhp','chem91'],['wmhp','wmhpparent'],
+['valedictorian','starpupil'],['valedictorian','weaponx'],
+['weaponx','mendopurps'],['weaponx','pakistani'],
+['medipak','medihaze'],['medipak','swabi'],
+['goldenpineapple','c99'],['goldenpineapple','whitewidow'],
+['bluetuna','bluedream'],['bluetuna','tunakush'],
+['bluedream','blueberry'],['bluedream','haze'],
+['moneytree','gg4'],['moneytree','jillybean'],
+['jillybean','orangevelvet'],['jillybean','spacequeen'],
+['spacequeen','romulan'],['spacequeen','c99'],
+['fishsticks','bluetuna'],['fishsticks','icyog'],
+['bubblepak','bubblegum'],['bubblepak','medipak'],
 ];
 (function(){
 const SVGNS='http://www.w3.org/2000/svg';
-const byId=Object.fromEntries(N.map(n=>[n[0],{id:n[0],label:n[1],src:n[2],mine:!!n[3],ft:n[4],aroma:n[5],cross:n[6],url:n[7]}]));
+const byId=Object.fromEntries(N.map(n=>[n[0],{id:n[0],label:n[1],src:n[2],mine:!!n[3],ft:n[4],aroma:n[5],cross:n[6],url:n[7],breeder:n[8]||''}]));
 const par={},kids={};E.forEach(([c,p,k])=>{(par[c]=par[c]||[]).push({p,k:k||'cross'});(kids[p]=kids[p]||[]).push(c)});
 function up(id,s=new Set()){(par[id]||[]).forEach(x=>{if(!s.has(x.p)){s.add(x.p);up(x.p,s)}});return s}
 function down(id,s=new Set()){(kids[id]||[]).forEach(c=>{if(!s.has(c)){s.add(c);down(c,s)}});return s}
 const mine=N.filter(n=>n[3]).map(n=>n[0]);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const isDead=id=>byId[id].src==='unknown'&&!par[id];
+const isWeb=()=>view==='all'||view.startsWith('b:');
 let view=mine[0], scale=null, showDead=true, hlId=null, lastLayout=null;
-try{const v=localStorage.getItem('lw-view');if(v&&(v==='all'||byId[v]))view=v;const d=localStorage.getItem('lw-dead');if(d==='0')showDead=false}catch(e){}
+try{const v=localStorage.getItem('lw-view');if(v&&(v==='all'||v.startsWith('b:')||byId[v]))view=v;const d=localStorage.getItem('lw-dead');if(d==='0')showDead=false}catch(e){}
 const svg=document.getElementById('g'),scroller=document.getElementById('scroller');
 document.getElementById('dead').checked=showDead;
 
 function visibleSet(){
   let s;
   if(view==='all')s=new Set(Object.keys(byId));
+  else if(view.startsWith('b:')){s=new Set();mine.filter(m=>byId[m].breeder===view.slice(2)).forEach(m=>{s.add(m);up(m).forEach(x=>s.add(x))})}
   else s=new Set([view,...up(view)]);
   if(!showDead)for(const id of [...s])if(isDead(id)&&!byId[id].mine)s.delete(id);
   return s;
 }
 function layout(vis){
   const g=new dagre.graphlib.Graph();
-  g.setGraph({rankdir:'TB',nodesep:view==='all'?18:26,ranksep:view==='all'?54:46,edgesep:10,marginx:8,marginy:8,ranker:view==='all'?'longest-path':'network-simplex'});
+  g.setGraph({rankdir:'TB',nodesep:isWeb()?18:26,ranksep:isWeb()?54:46,edgesep:10,marginx:8,marginy:8,ranker:isWeb()?'longest-path':'network-simplex'});
   g.setDefaultEdgeLabel(()=>({}));
   vis.forEach(id=>{const n=byId[id];g.setNode(id,{width:Math.round(n.label.length*7.6+28),height:n.mine?36:30})});
   E.forEach(([c,p,k],i)=>{if(vis.has(c)&&vis.has(p))g.setEdge(p,c,{k:k||'cross'})});
@@ -315,36 +462,36 @@ function draw(){
   const vis=visibleSet(),g=layout(vis);lastLayout=g;
   const W=Math.ceil(g.graph().width),H=Math.ceil(g.graph().height);
   const avail=Math.max(200,scroller.clientWidth-32);
-  if(scale===null)scale=Math.min(1,Math.max(view==='all'?.72:.68,avail/W));
+  if(scale===null)scale=Math.min(1,Math.max(isWeb()?.72:.68,avail/W));
   svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.setAttribute('width',Math.round(W*scale));svg.setAttribute('height',Math.round(H*scale));
   let out='<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrow" d="M0,0 L10,5 L0,10 z"/></marker><marker id="arh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrow hl" d="M0,0 L10,5 L0,10 z"/></marker></defs>';
-  const focus=view==='all'?hlId:view;
-  const lin=focus?new Set([focus,...up(focus),...(view==='all'?down(focus):[])]):null;
-  g.edges().forEach(e=>{const o=g.edge(e);const on=lin&&lin.has(e.v)&&lin.has(e.w)&&(up(focus).has(e.v)||e.v===focus)&&(up(focus).has(e.w)||e.w===focus)||(lin&&view==='all'&&(e.v===focus||down(focus).has(e.v))&&down(focus).has(e.w));
-    const cls='e '+(o.k!=='cross'?o.k:'')+(view==='all'&&lin?(on?' hl':' dim'):'');
-    out+='<path class="'+cls+'" d="'+path(o.points)+'" marker-end="url(#'+(view==='all'&&on?'arh':'ar')+')"/>'});
+  const focus=isWeb()?hlId:view;
+  const lin=focus?new Set([focus,...up(focus),...(isWeb()?down(focus):[])]):null;
+  g.edges().forEach(e=>{const o=g.edge(e);const on=lin&&lin.has(e.v)&&lin.has(e.w)&&(up(focus).has(e.v)||e.v===focus)&&(up(focus).has(e.w)||e.w===focus)||(lin&&isWeb()&&(e.v===focus||down(focus).has(e.v))&&down(focus).has(e.w));
+    const cls='e '+(o.k!=='cross'?o.k:'')+(isWeb()&&lin?(on?' hl':' dim'):'');
+    out+='<path class="'+cls+'" d="'+path(o.points)+'" marker-end="url(#'+(isWeb()&&on?'arh':'ar')+')"/>'});
   g.nodes().forEach(id=>{const o=g.node(id),n=byId[id];const x=o.x-o.width/2,y=o.y-o.height/2;
-    const cls='n '+n.src+(n.mine?' mine':'')+(id===focus?' focus':'')+(view==='all'&&lin&&!lin.has(id)?' dim':'');
+    const cls='n '+n.src+(n.mine?' mine':'')+(id===focus?' focus':'')+(isWeb()&&lin&&!lin.has(id)?' dim':'');
     out+='<g class="'+cls+'" data-id="'+id+'" tabindex="0" role="button" aria-label="'+esc(n.label)+'"><rect x="'+x+'" y="'+y+'" width="'+o.width+'" height="'+o.height+'" rx="7"/><text x="'+o.x+'" y="'+o.y+'">'+esc(n.label)+'</text></g>'});
   svg.innerHTML=out;
-  document.getElementById('viewtitle').textContent=view==='all'?'Full web':byId[view].label+' pedigree';
-  document.getElementById('viewsub').textContent=view==='all'?vis.size+' strains. Tap one to trace it, tap again to open its tree.':(vis.size-1)+' ancestors, oldest at top';
+  document.getElementById('viewtitle').textContent=view==='all'?'Full web':view.startsWith('b:')?view.slice(2)+' web':byId[view].label+' pedigree';
+  document.getElementById('viewsub').textContent=isWeb()?vis.size+' strains. Tap one to trace it, tap again to open its tree.':(vis.size-1)+' ancestors, oldest at top';
   document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.id===view)));
-  if(view!=='all'){requestAnimationFrame(()=>{scroller.scrollTop=0;const fx=g.node(view).x*scale;scroller.scrollLeft=Math.max(0,fx-scroller.clientWidth/2)})}
+  if(!isWeb()){requestAnimationFrame(()=>{scroller.scrollTop=0;const fx=g.node(view).x*scale;scroller.scrollLeft=Math.max(0,fx-scroller.clientWidth/2)})}
 }
-function setView(v){view=v;hlId=null;scale=null;try{localStorage.setItem('lw-view',v)}catch(e){}draw();detail(v==='all'?null:v)}
+function setView(v){view=v;hlId=null;scale=null;try{localStorage.setItem('lw-view',v)}catch(e){}draw();detail(isWeb()?null:v)}
 function onNode(id){
-  if(view==='all'){if(hlId===id){setView(id)}else{hlId=id;draw();detail(id)}}
+  if(isWeb()){if(hlId===id){setView(id)}else{hlId=id;draw();detail(id)}}
   else if(id!==view)setView(id);else detail(id);
 }
-svg.addEventListener('click',e=>{const t=e.target.closest('.n');if(t)onNode(t.dataset.id);else if(view==='all'&&hlId){hlId=null;draw()}});
+svg.addEventListener('click',e=>{const t=e.target.closest('.n');if(t)onNode(t.dataset.id);else if(isWeb()&&hlId){hlId=null;draw()}});
 svg.addEventListener('keydown',e=>{const t=e.target.closest('.n');if(t&&(e.key==='Enter'||e.key===' ')){e.preventDefault();onNode(t.dataset.id)}});
 document.getElementById('zin').onclick=()=>{scale=Math.min(1.6,(scale||1)*1.2);draw()};
 document.getElementById('zout').onclick=()=>{scale=Math.max(.2,(scale||1)/1.2);draw()};
 document.getElementById('zfit').onclick=()=>{const W=lastLayout.graph().width;scale=Math.min(1.2,(scroller.clientWidth-32)/W);draw()};
 document.getElementById('dead').onchange=e=>{showDead=e.target.checked;try{localStorage.setItem('lw-dead',showDead?'1':'0')}catch(_){}scale=null;draw()};
 
-const tagFor=s=>s==='archive'?['Archive','var(--archive-line)']:s==='offsite'?['Other breeder','var(--offsite-line)']:['Parents unknown','var(--unknown-line)'];
+const tagFor=s=>s==='own'?['Your cross','var(--own)']:s==='archive'?['Archive','var(--archive-line)']:s==='offsite'?['Other breeder','var(--offsite-line)']:['Parents unknown','var(--unknown-line)'];
 function detail(id){
   const el=document.getElementById('detail');
   if(!id){el.innerHTML='<h2>Pick a strain</h2><p class="hint">Tap a box in the web to trace its lineage. Its cross, flower time, aroma and source show here.</p>';return}
@@ -352,7 +499,7 @@ function detail(id){
   const ps=(par[id]||[]).map(x=>byId[x.p].label+(x.k==='sel'?' (selection)':x.k==='dash'?' (unconfirmed)':'')).join(' x ');
   const myDown=[...d].filter(x=>byId[x].mine);
   const founders=[...a].filter(x=>!par[x]).map(x=>byId[x].label);
-  el.innerHTML='<h2>'+esc(n.label)+'</h2><span class="tag" style="color:'+c+';border-color:'+c+'">'+t+'</span>'+(n.mine?' <span class="tag" style="color:var(--mine);border-color:var(--mine)">In your collection</span>':'')+
+  el.innerHTML='<h2>'+esc(n.label)+'</h2><span class="tag" style="color:'+c+';border-color:'+c+'">'+t+'</span>'+(n.breeder?' <span class="tag" style="color:var(--muted);border-color:var(--line)">'+esc(n.breeder)+'</span>':'')+(n.mine?' <span class="tag" style="color:var(--mine);border-color:var(--mine)">In your collection</span>':'')+
   '<div class="cross">'+esc(n.cross||ps||'No parents listed')+'</div><dl>'+
   (n.ft?'<dt>Flower</dt><dd>'+esc(n.ft)+'</dd>':'')+(n.aroma?'<dt>Aroma</dt><dd>'+esc(n.aroma)+'</dd>':'')+
   (ps?'<dt>Parents</dt><dd>'+esc(ps)+'</dd>':'')+
@@ -362,18 +509,21 @@ function detail(id){
   el.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{setView(b.dataset.go);document.getElementById('g').scrollIntoView({block:'nearest'})});
 }
 const chips=document.getElementById('chips');
-const mk=(id,label,cls)=>{const b=document.createElement('button');b.className='chip'+(cls?' '+cls:'');b.type='button';b.dataset.id=id;b.id='chip-'+id;b.textContent=label;b.onclick=()=>setView(id);chips.appendChild(b)};
-mk('all','Full web','all');mine.forEach(id=>mk(id,byId[id].label));
+const mk=(id,label,cls,parent)=>{const b=document.createElement('button');b.className='chip'+(cls?' '+cls:'');b.type='button';b.dataset.id=id;b.id='chip-'+id.replace(/[^a-z0-9]/gi,'_');b.textContent=label;b.onclick=()=>setView(id);parent.appendChild(b);return b};
+const top=document.createElement('div');top.className='chiprow';chips.appendChild(top);mk('all','Full web','all',top);
+const breeders=[...new Set(mine.map(m=>byId[m].breeder))];
+breeders.forEach(br=>{const row=document.createElement('div');row.className='chiprow';const h=mk('b:'+br,br,'brd',row);h.title='Show the '+br+' web';
+  mine.filter(m=>byId[m].breeder===br).forEach(id=>mk(id,byId[id].label,'',row));chips.appendChild(row)});
 let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{scale=null;draw()},200)});
-draw();detail(view==='all'?null:view);
+draw();detail(isWeb()?null:view);
 
 // moonbow share
 const memo={};function fr(id){if(memo[id])return memo[id];const ps=par[id];let r={};
  if(id==='moonbow'||!ps){r[id]=1}else{const w=['lemonheads2','dreammachine','crazyhazey'].includes(id)?[.25,.25,.5]:ps.map(()=>1/ps.length);
  ps.forEach((x,i)=>{const f=fr(x.p);for(const k in f)r[k]=(r[k]||0)+f[k]*w[i]})}return memo[id]=r}
-const mb=mine.map(id=>[id,(fr(id).moonbow||0)]).sort((a,b)=>b[1]-a[1]);
+const mb=mine.filter(id=>byId[id].breeder==='Archive Seed Bank').map(id=>[id,(fr(id).moonbow||0)]).sort((a,b)=>b[1]-a[1]);
 document.getElementById('mbbars').innerHTML=mb.map(([id,v])=>'<div class="brow"><span>'+esc(byId[id].label)+'</span><div class="btrack"><div class="bfill" style="width:'+(v*100)+'%"></div></div><span class="num">'+Math.round(v*100)+'%</span></div>').join('');
-document.getElementById('tbody').innerHTML=mine.map(id=>{const n=byId[id];return '<tr><td><b>'+esc(n.label)+'</b></td><td class="m">'+esc(n.cross)+'</td><td>'+esc(n.ft||'Not listed')+'</td><td>'+esc(n.aroma||'Not listed')+'</td></tr>'}).join('');
+document.getElementById('tbody').innerHTML=mine.map(id=>{const n=byId[id];return '<tr><td><b>'+esc(n.label)+'</b></td><td>'+esc(n.breeder)+'</td><td class="m">'+esc(n.cross)+'</td><td>'+esc(n.ft||'Not listed')+'</td><td>'+esc(n.aroma||'Not listed')+'</td></tr>'}).join('');
 })();
 
 </script>
