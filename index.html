@@ -109,7 +109,7 @@ td.m{font-family:var(--f-mono);font-size:12.5px}
 <body>
 <div class="wrap">
 <header>
-  <div class="kicker">32 strains · 9 breeders · traced to founders</div>
+  <div class="kicker">33 strains · 9 breeders · traced to founders</div>
   <h1>Collection Lineage Web</h1>
   <p>Each tree reads top to bottom: oldest ancestors first, your strain last. Pick a strain to see its pedigree, tap a breeder name to see that breeder's web, or open the full web to see how everything connects. Tap any box to jump to that strain's own tree.</p>
 </header>
@@ -142,7 +142,7 @@ td.m{font-family:var(--f-mono);font-size:12.5px}
     <h2>Breeding read</h2>
     <h3>Bridges between your Archive and non-Archive strains</h3>
     <ul>
-      <li><b>OGKB / GSC</b> is the big shared root. It runs through all 14 Archive strains and also Truffle Alert, Cross of the Titans (via Mendo Breath and Grateful Breath) and Sour Trop (via Tropicana Cookies).</li>
+      <li><b>OGKB / GSC</b> is the big shared root. It runs through all 15 Archive strains and also Truffle Alert, Cross of the Titans (via Mendo Breath and Grateful Breath) and Sour Trop (via Tropicana Cookies).</li>
       <li><b>Zkittlez</b> links Icy OG (via Icy Grape) to the Archive Moonbow line, so <b>Fish Sticks</b> carries a little Archive-adjacent background.</li>
       <li><b>Dosidos</b> shows up outside Archive in Truffle Alert, via White Truffle → Gorilla Butter → Peanut Butter Breath.</li>
       <li><b>Chemdog</b> ties Sour Trop, Cross of the Titans, Watermelon Hashplant and the (GG4 x I-95) x Chemdog S1.</li>
@@ -164,7 +164,8 @@ td.m{font-family:var(--f-mono);font-size:12.5px}
 
     <h3>Within Archive</h3>
     <ul>
-      <li><b>Moonbow 112 F2 #60</b> (one male) sits behind 11 of the 14 Archive strains. <b>Oishii</b> is a parent or grandparent of 9.</li>
+      <li><b>Dosi-Cake</b> is 50% Dosidos but 0% Moonbow. It shares Dosidos (and OGKB / Face Off) with the whole Archive block but none of the Moonbow / Oishii stack, so it is a mid-distance cross for the Moonbow-heavy strains.</li>
+      <li><b>Moonbow 112 F2 #60</b> (one male) sits behind 11 of the 15 Archive strains. <b>Oishii</b> is a parent or grandparent of 9.</li>
       <li>Closest pairs: Ichibo x Oishii, Ichibo x Lemon Venom, Moonbow 112 IX x Oishii (about 75% shared).</li>
       <li>Best outcrosses for the Moonbow-heavy group: any non-Archive strain above, or Nu Walka / Wraith (about 9% Moonbow).</li>
     </ul>
@@ -245,6 +246,8 @@ const N=[
 ['albertwalker','Albert Walker',U,0,'','','Clone-only; genetics unknown (Leafly)',''],
 ['gelato25','Gelato #25',O,0,'','','Gelato pheno: Sunset Sherbet x Thin Mint GSC (SeedFinder)',''],
 ['sourflorida','Sour Florida OG',O,0,'','','OG Kush (South Florida) cut',''],
+['dosicake','Dosi-Cake',A,1,'9-10 weeks (Wedding Cake-leaning phenos up to 11)','Sticky sweet, cakey','Wedding Cake x Dosidos (feminized)','https://archiveseedbank.com/products/dosi-cake','Archive Seed Bank'],
+['weddingcake','Wedding Cake',O,0,'','','Seed Junky cut. Parentage is disputed (Triangle Kush x Animal Mints, or Cherry Pie x GSC), so not traced further',''],
 // ===== non-Archive collection =====
 ['sourtrop','Sour Trop',O,1,'63-75 days','','Sour Diesel V2 x Tropicana Cookies','','Oni Seed Co'],
 ['crosstitans','Cross of the Titans',O,1,'65+ days','','Best Shit Ever x Clash of the Titans (Medusa x Pegasus)','https://seedfinder.eu/en/strain-info/cross-of-the-titans/bred-by-42/genealogy','Bred by 42'],
@@ -371,6 +374,7 @@ const E=[ // child, parent, kind
 ['zilla','purpleindica'],['zilla','skunkhaze'],
 ['gelato25','sunsetsherbet'],['gelato25','gsc'],
 ['sourflorida','ogkush','sel'],
+['dosicake','weddingcake'],['dosicake','dosidos'],
 ['hpk','purekush','sel'],
 ['sourtrop','sourdieselv2'],['sourtrop','tropcookies'],
 ['sourdieselv2','sourdiesel','dash'],
