@@ -109,7 +109,7 @@ td.m{font-family:var(--f-mono);font-size:12.5px}
 <body>
 <div class="wrap">
 <header>
-  <div class="kicker">33 strains · 9 breeders · traced to founders</div>
+  <div class="kicker">40 strains · 12 breeders · traced to founders</div>
   <h1>Collection Lineage Web</h1>
   <p>Each tree reads top to bottom: oldest ancestors first, your strain last. Pick a strain to see its pedigree, tap a breeder name to see that breeder's web, or open the full web to see how everything connects. Tap any box to jump to that strain's own tree.</p>
 </header>
@@ -148,6 +148,8 @@ td.m{font-family:var(--f-mono);font-size:12.5px}
       <li><b>Chemdog</b> ties Sour Trop, Cross of the Titans, Watermelon Hashplant and the (GG4 x I-95) x Chemdog S1.</li>
       <li><b>GG4</b> ties (GG4 x I-95) x Chemdog S1, Truffle Alert and Money Tree.</li>
       <li><b>Cinderella 99</b> ties Golden Pineapple, Golden PuTang and Money Tree (via Jilly Bean → Space Queen).</li>
+      <li><b>Blueberry</b> ties <b>Diablo</b> to Blue Tuna (via Blue Dream) and so to <b>Fish Sticks</b>. Diablo's Grapefruit side is the same Grapefruit behind Zkittlez, a faint link to the Archive Moonbow line and Icy OG.</li>
+      <li><b>Thai / Afghani</b> (inside Blueberry) also tie Diablo to Star Pupil, so Golden PuTang and Valedictorian.</li>
       <li><b>Star Pupil / Pakistani</b> tie Golden PuTang and Valedictorian. <b>Tangie</b> ties Golden PuTang and Sour Trop.</li>
     </ul>
 
@@ -155,6 +157,7 @@ td.m{font-family:var(--f-mono);font-size:12.5px}
     <ul>
       <li><b>Fish Sticks</b> (Blue Tuna x Icy OG): the parents share no known ancestors. That is a true outcross, so expect a lot of variation in the F1 and vigor.</li>
       <li><b>Bubble PAK</b> (Bubble Gum x Medi Pak): also a clean outcross. Bubble Gum candy plus Pakistani hashplant structure.</li>
+      <li><b>Diablo x Fish Sticks</b> would line-breed Blueberry (Diablo is 75% Blueberry, Fish Sticks about 12%). <b>Diablo x Bubble PAK</b> is a clean outcross.</li>
       <li>Most different from the Archive block: Laos Landrace, Salmon Creek Big Bud F2, Blue Tuna, Bubble PAK, Medi Pak, Valedictorian, Meigs OG. None share a known ancestor with the Archive strains.</li>
     </ul>
 
@@ -224,7 +227,7 @@ const N=[
 ['zkittlez','Zkittlez',O,0,'','','(Grape Ape x Grapefruit) x unknown (Dying Breed / Terp Hogz)','https://seedfinder.eu/en/strain-info/the-original-z/dying-breed-seeds/genealogy'],
 ['zk5','Zkittles #5',O,0,'','','Selection of Zkittlez',''],
 ['grapeape','Grape Ape',U,0,'','','Founder',''],
-['grapefruit','Grapefruit',U,0,'','','Founder',''],
+['grapefruit','Grapefruit',U,0,'','','Founder (SeedFinder: unknown hybrid)',''],
 ['planetpurplef2','Planet Purple F2 (#144)',A,0,'','','F2 of Planet Purple F1; #144 is the male used in Dream Machine',''],
 ['planetpurplef1','Planet Purple F1',A,0,'','','Sherbidos x Moonbow #75 (Archive strain library)',''],
 ['sherbidos','Sherbidos (Sherbadough)',A,0,'','','Sunset Sherbet x Dosidos (Archive)','https://seedfinder.eu/en/strain-info/sherbadough/archive-seed-bank/genealogy'],
@@ -249,6 +252,21 @@ const N=[
 ['dosicake','Dosi-Cake',A,1,'9-10 weeks (Wedding Cake-leaning phenos up to 11)','Sticky sweet, cakey','Wedding Cake x Dosidos (feminized)','https://archiveseedbank.com/products/dosi-cake','Archive Seed Bank'],
 ['weddingcake','Wedding Cake',O,0,'','','Seed Junky cut. Parentage is disputed (Triangle Kush x Animal Mints, or Cherry Pie x GSC), so not traced further',''],
 // ===== non-Archive collection =====
+['diablo','Diablo',O,1,'6-7 weeks indoor (SeedFinder ~46 days); outdoors Sept 15-30 in BC','Very smooth, spicy undertones, sweet resinous berry-citrus','(Blueberry x Grapefruit) x Blueberry. Breeder also credits South African sativa, not shown in SeedFinder tree','https://seedfinder.eu/en/strain-info/diablo/next-generation-seed-company','Next Generation Seed Co'],
+['bbgf','Blueberry x Grapefruit',O,0,'','','',''],
+['scbigbud','Salmon Creek Big Bud',O,1,'Late October finish (outdoor)','','Mendocino Big Bud beans sourced via THCVhunter, open-pollinated by COPA (American Heirlooms release, regular seeds)','','Copa Genetics'],
+['wgauto','Wedding Glue Auto',O,1,'63-70 days (9-10 weeks)','Sweet vanilla icing, earthy, fruity hints, peppery and sour on the exhale','Wedding Cake x Gorilla Glue, autoflowering (Fast Buds). Autoflower side not traced','https://en.seedfinder.eu/strain-info/Wedding_Glue_Auto/Fast_Buds_Company/','Fast Buds'],
+['cherrywinef2','Cherry Wine F2',O,1,'Early October outdoors, about day 45 indoors (kept under 0.3% THC)','Cherry floral with pine skunk (per Cherry Wine descriptions)','F2 from two males and one female of Kaya Creations Cherry Wine (CBD, regular seeds). Cherry Wine = The Wife x Charlotte\'s Cherries (Tree of Life Seeds)','','West Creek CBD Connection'],
+['cherrywine','Cherry Wine',O,0,'','','The Wife x Charlotte\'s Cherries (Tree of Life Seeds)',''],
+['thewife','The Wife',U,0,'','','Parents not found',''],
+['charcherries','Charlotte\'s Cherries',U,0,'','','Parents not found',''],
+['goldfish','Goldfish',O,1,'8-10 weeks','Not listed','Kodiak Gold x Black Tuna','','Hazeman Seeds'],
+['kodiakgold','Kodiak Gold',U,0,'7.5 weeks indoor','','Reeferman\'s Kodiak Gold, from Kodiak Island, Alaska. Parents not found',''],
+['blacktuna','Black Tuna',O,0,'','','Herijuana x Lamb\'s Bread (5 Star Organic)',''],
+['herijuana','Herijuana',U,0,'','','Parents not found',''],
+['lambsbread','Lamb\'s Bread',U,0,'','','Parents not found',''],
+['specialds','Special D\'s',U,1,'','','No details in your note yet (title only)','','Unknown breeder'],
+['texasbutterf2','Texas Butter F2',U,1,'','','No details in your note yet (title only)','','Unknown breeder'],
 ['sourtrop','Sour Trop',O,1,'63-75 days','','Sour Diesel V2 x Tropicana Cookies','','Oni Seed Co'],
 ['crosstitans','Cross of the Titans',O,1,'65+ days','','Best Shit Ever x Clash of the Titans (Medusa x Pegasus)','https://seedfinder.eu/en/strain-info/cross-of-the-titans/bred-by-42/genealogy','Bred by 42'],
 ['gg4i95chem','(GG4 x I-95) x Chemdog S1',O,1,'','','(GG4 x I-95) x Chemdog S1','','Unknown breeder'],
@@ -326,7 +344,12 @@ const N=[
 ['c99','Cinderella 99',U,0,'','','Founder',''],
 ['whitewidow','White Widow',U,0,'','','Founder',''],
 ['bluedream','Blue Dream',O,0,'','','Blueberry x Haze',''],
-['blueberry','Blueberry',U,0,'','','Founder',''],
+['blueberry','Blueberry',O,0,'','','Temple Flo x HTAF (DJ Short Blueberry line, SeedFinder)',''],
+['templeflo','Temple Flo',O,0,'','','Purple Thai x Afghani (DJ Short Floral line)',''],
+['htaf','HTAF',O,0,'','','Highland Thai x Afghani',''],
+['purplethai','Purple Thai',O,0,'','','H.O.G. (Mexican) x Chocolate Thai',''],
+['hog','H.O.G.',U,0,'','','Mexican sativa founder',''],
+['chocthai','Chocolate Thai',U,0,'','','Thai landrace founder',''],
 ['haze','Haze',U,0,'','','Founder',''],
 ['tunakush','Tuna Kush',U,0,'','','Parents not found',''],
 ['jillybean','Jilly Bean (TGA)',O,0,'','','Orange Velvet x Space Queen',''],
@@ -375,6 +398,17 @@ const E=[ // child, parent, kind
 ['gelato25','sunsetsherbet'],['gelato25','gsc'],
 ['sourflorida','ogkush','sel'],
 ['dosicake','weddingcake'],['dosicake','dosidos'],
+['scbigbud','bigbud','sel'],
+['wgauto','weddingcake'],['wgauto','gg4','dash'],
+['cherrywinef2','cherrywine','sel'],['cherrywine','thewife'],['cherrywine','charcherries'],
+['goldfish','kodiakgold'],['goldfish','blacktuna'],
+['blacktuna','herijuana'],['blacktuna','lambsbread'],
+['diablo','bbgf'],['diablo','blueberry'],
+['bbgf','blueberry'],['bbgf','grapefruit'],
+['blueberry','templeflo'],['blueberry','htaf'],
+['templeflo','purplethai'],['templeflo','afghani'],
+['purplethai','hog'],['purplethai','chocthai'],
+['htaf','thai'],['htaf','afghani'],
 ['hpk','purekush','sel'],
 ['sourtrop','sourdieselv2'],['sourtrop','tropcookies'],
 ['sourdieselv2','sourdiesel','dash'],
