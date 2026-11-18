@@ -24,7 +24,7 @@
 <section class="panel">
   <h2>Lineage table</h2>
   <div class="tablewrap"><table>
-    <thead><tr><th>Strain</th><th>Breeder</th><th>Cross</th><th>Flower</th><th>Aroma</th></tr></thead>
+    <thead><tr><th aria-sort="none"><button type="button" class="sort" data-k="label">Strain</button></th><th aria-sort="none"><button type="button" class="sort" data-k="breeder">Breeder</button></th><th aria-sort="none"><button type="button" class="sort" data-k="cross">Cross</button></th><th aria-sort="none"><button type="button" class="sort" data-k="ft">Flower</button></th><th aria-sort="none"><button type="button" class="sort" data-k="aroma">Aroma</button></th></tr></thead>
     <tbody id="tbody"></tbody>
   </table></div>
   <p class="note">Notes: "Crazy Haze" is listed by Archive as Crazy Hazey. "Oishi" is Oishii. Circle Jerk has no Archive page; its cross comes from a resale listing. Biscotti is a Cookies strain, not an Archive release. Flavor Pack lineage is from SeedFinder and not confirmed by Archive. Golden Pineapple: you listed (C99 x White Widow) x PuTang, but SeedFinder lists Golden Pineapple as C99 x White Widow and Golden PuTang as Golden Pineapple x PuTang; the tree follows SeedFinder. Medusa follows your note (Pure Kush x Mendo Breath), not Nirvana's Medusa. Cross of the Titans is a Bred by 42 strain: Best Shit Ever x Clash of the Titans. White Truffle, GG4, Mendo Breath, Peanut Butter Breath and Jilly Bean parents are widely reported rather than breeder-confirmed.</p>
@@ -34,7 +34,22 @@
 
 <script src="data.js"></script>
 <script>
-document.getElementById('tbody').innerHTML=mine.map(id=>{const n=byId[id];return '<tr><td><b>'+esc(n.label)+'</b></td><td>'+esc(n.breeder)+'</td><td class="m">'+esc(n.cross)+'</td><td>'+esc(n.ft||'Not listed')+'</td><td>'+esc(n.aroma||'Not listed')+'</td></tr>'}).join('');
+const tb=document.getElementById('tbody');
+const row=n=>'<tr><td><b><a href="index.html#'+encodeURIComponent(n.id)+'">'+esc(n.label)+'</a></b></td><td>'+esc(n.breeder)+'</td><td class="m">'+esc(n.cross)+'</td><td>'+esc(n.ft||'Not listed')+'</td><td>'+esc(n.aroma||'Not listed')+'</td></tr>';
+const heads=[...document.querySelectorAll('th[aria-sort]')];
+let sk=null,dir=1;
+function render(){
+  const list=mine.map(id=>byId[id]);
+  if(sk){
+    const num=sk==='ft';
+    const val=n=>{const v=n[sk]||'';if(num){const m=v.match(/(\d+(?:\.\d+)?)(?:\s*-\s*\d+(?:\.\d+)?)?\s*(weeks?)?/i);return m?parseFloat(m[1])*(m[2]?7:1):null}return v.trim()&&!/^not listed$/i.test(v.trim())?v.toLowerCase():null};
+    list.sort((a,b)=>{const x=val(a),y=val(b);if(x===null||y===null)return x===y?0:x===null?1:-1;return (x<y?-1:x>y?1:0)*dir});
+  }
+  tb.innerHTML=list.map(row).join('');
+  heads.forEach(h=>h.setAttribute('aria-sort',h.firstChild.dataset.k===sk?(dir>0?'ascending':'descending'):'none'));
+}
+heads.forEach(h=>h.firstChild.onclick=()=>{const k=h.firstChild.dataset.k;if(sk===k)dir=-dir;else{sk=k;dir=1}render()});
+render();
 </script>
 </body>
 </html>
