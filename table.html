@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Lineage Table</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">40 · 12 breeders strains</div>
+  <h1>Lineage table</h1>
+  <p>Every strain in your collection with its breeder, cross, flower time and aroma.</p>
+  <nav class="pages" aria-label="Pages"><a href="index.html">Lineage web</a><a href="table.html" aria-current="page">Lineage table</a><a href="breeding.html">Breeding read</a></nav>
+</header>
+
+<section class="panel">
+  <h2>Lineage table</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Strain</th><th>Breeder</th><th>Cross</th><th>Flower</th><th>Aroma</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table></div>
+  <p class="note">Notes: "Crazy Haze" is listed by Archive as Crazy Hazey. "Oishi" is Oishii. Circle Jerk has no Archive page; its cross comes from a resale listing. Biscotti is a Cookies strain, not an Archive release. Flavor Pack lineage is from SeedFinder and not confirmed by Archive. Golden Pineapple: you listed (C99 x White Widow) x PuTang, but SeedFinder lists Golden Pineapple as C99 x White Widow and Golden PuTang as Golden Pineapple x PuTang; the tree follows SeedFinder. Medusa follows your note (Pure Kush x Mendo Breath), not Nirvana's Medusa. Cross of the Titans is a Bred by 42 strain: Best Shit Ever x Clash of the Titans. White Truffle, GG4, Mendo Breath, Peanut Butter Breath and Jilly Bean parents are widely reported rather than breeder-confirmed.</p>
+</section>
+
+</div>
+
+<script src="data.js"></script>
+<script>
+document.getElementById('tbody').innerHTML=mine.map(id=>{const n=byId[id];return '<tr><td><b>'+esc(n.label)+'</b></td><td>'+esc(n.breeder)+'</td><td class="m">'+esc(n.cross)+'</td><td>'+esc(n.ft||'Not listed')+'</td><td>'+esc(n.aroma||'Not listed')+'</td></tr>'}).join('');
+</script>
+</body>
+</html>
