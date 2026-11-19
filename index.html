@@ -47,10 +47,10 @@
   </section>
 </div>
 
-<script src="data.js"></script>
+<script src="data-loader.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
 <script>
-(function(){
+loadData().then(function(){
 const SVGNS='http://www.w3.org/2000/svg';
 function up(id,s=new Set()){(par[id]||[]).forEach(x=>{if(!s.has(x.p)){s.add(x.p);up(x.p,s)}});return s}
 function down(id,s=new Set()){(kids[id]||[]).forEach(c=>{if(!s.has(c)){s.add(c);down(c,s)}});return s}
@@ -167,7 +167,7 @@ breeders.forEach(br=>{const row=document.createElement('div');row.className='chi
 addEventListener('hashchange',()=>{const h=fromHash();if(!h)return;if(h.v!==view)setView(h.v);if(isWeb()&&h.h!==hlId){hlId=h.h;draw();detail(h.h)}});
 let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{scale=null;draw()},200)});
 draw();detail(isWeb()?hlId:view);
-})();
+});
 
 </script>
 </body>

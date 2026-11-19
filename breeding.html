@@ -64,14 +64,17 @@
 
 </div>
 
-<script src="data.js"></script>
+<script src="data-loader.js"></script>
 <script>
+loadData().then(function(){
 // moonbow share
 const memo={};function fr(id){if(memo[id])return memo[id];const ps=par[id];let r={};
  if(id==='moonbow'||!ps){r[id]=1}else{const w=['lemonheads2','dreammachine','crazyhazey'].includes(id)?[.25,.25,.5]:ps.map(()=>1/ps.length);
  ps.forEach((x,i)=>{const f=fr(x.p);for(const k in f)r[k]=(r[k]||0)+f[k]*w[i]})}return memo[id]=r}
 const mb=mine.filter(id=>byId[id].breeder==='Archive Seed Bank').map(id=>[id,(fr(id).moonbow||0)]).sort((a,b)=>b[1]-a[1]);
 document.getElementById('mbbars').innerHTML=mb.map(([id,v])=>'<div class="brow"><span>'+esc(byId[id].label)+'</span><div class="btrack"><div class="bfill" style="width:'+(v*100)+'%"></div></div><span class="num">'+Math.round(v*100)+'%</span></div>').join('');
+
+});
 </script>
 </body>
 </html>

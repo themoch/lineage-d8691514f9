@@ -1,0 +1,762 @@
+[
+ {
+  "child": "wraith",
+  "parent": "ghostog"
+ },
+ {
+  "child": "wraith",
+  "parent": "nubo"
+ },
+ {
+  "child": "zumo",
+  "parent": "zwoosh"
+ },
+ {
+  "child": "zumo",
+  "parent": "nubo"
+ },
+ {
+  "child": "nubo",
+  "parent": "nudiesel"
+ },
+ {
+  "child": "nubo",
+  "parent": "ichiban"
+ },
+ {
+  "child": "lemonvenom",
+  "parent": "tahitilime"
+ },
+ {
+  "child": "lemonvenom",
+  "parent": "ichiban"
+ },
+ {
+  "child": "nuwalka",
+  "parent": "dogwalker"
+ },
+ {
+  "child": "nuwalka",
+  "parent": "nubo"
+ },
+ {
+  "child": "ichibo",
+  "parent": "ichiban8"
+ },
+ {
+  "child": "ichibo",
+  "parent": "mb112f260"
+ },
+ {
+  "child": "ichiban8",
+  "parent": "ichiban",
+  "kind": "sel"
+ },
+ {
+  "child": "ichiban",
+  "parent": "toadvenom"
+ },
+ {
+  "child": "ichiban",
+  "parent": "oishii"
+ },
+ {
+  "child": "bingo",
+  "parent": "zilla"
+ },
+ {
+  "child": "bingo",
+  "parent": "oishii"
+ },
+ {
+  "child": "lemonheads2",
+  "parent": "dogwalker"
+ },
+ {
+  "child": "lemonheads2",
+  "parent": "lemonpeel"
+ },
+ {
+  "child": "lemonheads2",
+  "parent": "planetpurplef2"
+ },
+ {
+  "child": "circlejerk",
+  "parent": "superruntz"
+ },
+ {
+  "child": "circlejerk",
+  "parent": "oishii"
+ },
+ {
+  "child": "mb112ix",
+  "parent": "mb112"
+ },
+ {
+  "child": "mb112ix",
+  "parent": "mb112f260"
+ },
+ {
+  "child": "crazyhazey",
+  "parent": "bshw"
+ },
+ {
+  "child": "crazyhazey",
+  "parent": "faceoff"
+ },
+ {
+  "child": "crazyhazey",
+  "parent": "mb75"
+ },
+ {
+  "child": "dreammachine",
+  "parent": "albertwalker"
+ },
+ {
+  "child": "dreammachine",
+  "parent": "zk5"
+ },
+ {
+  "child": "dreammachine",
+  "parent": "planetpurplef2"
+ },
+ {
+  "child": "oishii",
+  "parent": "flavorpack7"
+ },
+ {
+  "child": "oishii",
+  "parent": "mb112f260"
+ },
+ {
+  "child": "biscotti",
+  "parent": "gelato25"
+ },
+ {
+  "child": "biscotti",
+  "parent": "sourflorida"
+ },
+ {
+  "child": "zwoosh",
+  "parent": "zkittlez"
+ },
+ {
+  "child": "zwoosh",
+  "parent": "oishii"
+ },
+ {
+  "child": "tahitilime",
+  "parent": "mb25"
+ },
+ {
+  "child": "tahitilime",
+  "parent": "lemonlime"
+ },
+ {
+  "child": "toadvenom",
+  "parent": "animalmintz"
+ },
+ {
+  "child": "toadvenom",
+  "parent": "sinmint"
+ },
+ {
+  "child": "flavorpack7",
+  "parent": "hpk",
+  "kind": "dash"
+ },
+ {
+  "child": "flavorpack7",
+  "parent": "moonbow",
+  "kind": "dash"
+ },
+ {
+  "child": "mb112f260",
+  "parent": "mb112",
+  "kind": "sel"
+ },
+ {
+  "child": "mb112",
+  "parent": "moonbow",
+  "kind": "sel"
+ },
+ {
+  "child": "mb75",
+  "parent": "moonbow",
+  "kind": "sel"
+ },
+ {
+  "child": "mb25",
+  "parent": "moonbow",
+  "kind": "sel"
+ },
+ {
+  "child": "moonbow",
+  "parent": "zkittlez"
+ },
+ {
+  "child": "moonbow",
+  "parent": "dosidos"
+ },
+ {
+  "child": "dosidos",
+  "parent": "ogkb"
+ },
+ {
+  "child": "dosidos",
+  "parent": "faceoffbx1"
+ },
+ {
+  "child": "faceoffbx1",
+  "parent": "faceoff",
+  "kind": "sel"
+ },
+ {
+  "child": "faceoff",
+  "parent": "ogkush",
+  "kind": "sel"
+ },
+ {
+  "child": "ogkb",
+  "parent": "gsc",
+  "kind": "sel"
+ },
+ {
+  "child": "gsc",
+  "parent": "ogkush"
+ },
+ {
+  "child": "gsc",
+  "parent": "durban"
+ },
+ {
+  "child": "zkittlez",
+  "parent": "grapeape"
+ },
+ {
+  "child": "zkittlez",
+  "parent": "grapefruit"
+ },
+ {
+  "child": "zk5",
+  "parent": "zkittlez",
+  "kind": "sel"
+ },
+ {
+  "child": "planetpurplef2",
+  "parent": "planetpurplef1",
+  "kind": "sel"
+ },
+ {
+  "child": "planetpurplef1",
+  "parent": "sherbidos"
+ },
+ {
+  "child": "planetpurplef1",
+  "parent": "mb75"
+ },
+ {
+  "child": "sherbidos",
+  "parent": "sunsetsherbet"
+ },
+ {
+  "child": "sherbidos",
+  "parent": "dosidos"
+ },
+ {
+  "child": "sunsetsherbet",
+  "parent": "gsc"
+ },
+ {
+  "child": "sunsetsherbet",
+  "parent": "pinkpanties"
+ },
+ {
+  "child": "ghostog",
+  "parent": "ogkush",
+  "kind": "sel"
+ },
+ {
+  "child": "zilla",
+  "parent": "purpleindica"
+ },
+ {
+  "child": "zilla",
+  "parent": "skunkhaze"
+ },
+ {
+  "child": "gelato25",
+  "parent": "sunsetsherbet"
+ },
+ {
+  "child": "gelato25",
+  "parent": "gsc"
+ },
+ {
+  "child": "sourflorida",
+  "parent": "ogkush",
+  "kind": "sel"
+ },
+ {
+  "child": "dosicake",
+  "parent": "weddingcake"
+ },
+ {
+  "child": "dosicake",
+  "parent": "dosidos"
+ },
+ {
+  "child": "scbigbud",
+  "parent": "bigbud",
+  "kind": "sel"
+ },
+ {
+  "child": "wgauto",
+  "parent": "weddingcake"
+ },
+ {
+  "child": "wgauto",
+  "parent": "gg4",
+  "kind": "dash"
+ },
+ {
+  "child": "cherrywinef2",
+  "parent": "cherrywine",
+  "kind": "sel"
+ },
+ {
+  "child": "cherrywine",
+  "parent": "thewife"
+ },
+ {
+  "child": "cherrywine",
+  "parent": "charcherries"
+ },
+ {
+  "child": "goldfish",
+  "parent": "kodiakgold"
+ },
+ {
+  "child": "goldfish",
+  "parent": "blacktuna"
+ },
+ {
+  "child": "blacktuna",
+  "parent": "herijuana"
+ },
+ {
+  "child": "blacktuna",
+  "parent": "lambsbread"
+ },
+ {
+  "child": "diablo",
+  "parent": "bbgf"
+ },
+ {
+  "child": "diablo",
+  "parent": "blueberry"
+ },
+ {
+  "child": "bbgf",
+  "parent": "blueberry"
+ },
+ {
+  "child": "bbgf",
+  "parent": "grapefruit"
+ },
+ {
+  "child": "blueberry",
+  "parent": "templeflo"
+ },
+ {
+  "child": "blueberry",
+  "parent": "htaf"
+ },
+ {
+  "child": "templeflo",
+  "parent": "purplethai"
+ },
+ {
+  "child": "templeflo",
+  "parent": "afghani"
+ },
+ {
+  "child": "purplethai",
+  "parent": "hog"
+ },
+ {
+  "child": "purplethai",
+  "parent": "chocthai"
+ },
+ {
+  "child": "htaf",
+  "parent": "thai"
+ },
+ {
+  "child": "htaf",
+  "parent": "afghani"
+ },
+ {
+  "child": "hpk",
+  "parent": "purekush",
+  "kind": "sel"
+ },
+ {
+  "child": "sourtrop",
+  "parent": "sourdieselv2"
+ },
+ {
+  "child": "sourtrop",
+  "parent": "tropcookies"
+ },
+ {
+  "child": "sourdieselv2",
+  "parent": "sourdiesel",
+  "kind": "dash"
+ },
+ {
+  "child": "sourdiesel",
+  "parent": "origdiesel"
+ },
+ {
+  "child": "sourdiesel",
+  "parent": "dnl"
+ },
+ {
+  "child": "origdiesel",
+  "parent": "chemdog"
+ },
+ {
+  "child": "origdiesel",
+  "parent": "massskunknl"
+ },
+ {
+  "child": "tropcookies",
+  "parent": "gsc"
+ },
+ {
+  "child": "tropcookies",
+  "parent": "tangie"
+ },
+ {
+  "child": "tangie",
+  "parent": "calorange"
+ },
+ {
+  "child": "tangie",
+  "parent": "skunk"
+ },
+ {
+  "child": "crosstitans",
+  "parent": "bestshitever"
+ },
+ {
+  "child": "crosstitans",
+  "parent": "clashtitans"
+ },
+ {
+  "child": "clashtitans",
+  "parent": "medusa"
+ },
+ {
+  "child": "clashtitans",
+  "parent": "pegasus"
+ },
+ {
+  "child": "medusa",
+  "parent": "purekush"
+ },
+ {
+  "child": "medusa",
+  "parent": "mendobreath"
+ },
+ {
+  "child": "mendobreath",
+  "parent": "ogkb"
+ },
+ {
+  "child": "mendobreath",
+  "parent": "mendomontage"
+ },
+ {
+  "child": "pegasus",
+  "parent": "gratefulbreath"
+ },
+ {
+  "child": "pegasus",
+  "parent": "pe_gsaww"
+ },
+ {
+  "child": "gratefulbreath",
+  "parent": "ogkb"
+ },
+ {
+  "child": "gratefulbreath",
+  "parent": "joseph"
+ },
+ {
+  "child": "pe_gsaww",
+  "parent": "purpleelephant"
+ },
+ {
+  "child": "pe_gsaww",
+  "parent": "gs_aww"
+ },
+ {
+  "child": "purpleelephant",
+  "parent": "purpleurkle"
+ },
+ {
+  "child": "gs_aww",
+  "parent": "grapestomper"
+ },
+ {
+  "child": "gs_aww",
+  "parent": "alohaww"
+ },
+ {
+  "child": "grapestomper",
+  "parent": "purpleelephant"
+ },
+ {
+  "child": "grapestomper",
+  "parent": "sourdiesel"
+ },
+ {
+  "child": "gg4i95chem",
+  "parent": "gg4i95"
+ },
+ {
+  "child": "gg4i95chem",
+  "parent": "chemdogs1"
+ },
+ {
+  "child": "gg4i95",
+  "parent": "gg4"
+ },
+ {
+  "child": "gg4i95",
+  "parent": "i95"
+ },
+ {
+  "child": "gg4",
+  "parent": "gg4src"
+ },
+ {
+  "child": "chemdogs1",
+  "parent": "chemdog",
+  "kind": "sel"
+ },
+ {
+  "child": "chem91",
+  "parent": "chemdog",
+  "kind": "sel"
+ },
+ {
+  "child": "scbb",
+  "parent": "bigbud",
+  "kind": "sel"
+ },
+ {
+  "child": "trufflealert",
+  "parent": "whitetruffle"
+ },
+ {
+  "child": "trufflealert",
+  "parent": "poisonpotion"
+ },
+ {
+  "child": "whitetruffle",
+  "parent": "gorillabutter",
+  "kind": "sel"
+ },
+ {
+  "child": "gorillabutter",
+  "parent": "gg4"
+ },
+ {
+  "child": "gorillabutter",
+  "parent": "pbb"
+ },
+ {
+  "child": "pbb",
+  "parent": "dosidos"
+ },
+ {
+  "child": "pbb",
+  "parent": "mendobreath"
+ },
+ {
+  "child": "icyog",
+  "parent": "icygrape"
+ },
+ {
+  "child": "icyog",
+  "parent": "aogpsm"
+ },
+ {
+  "child": "meigsog",
+  "parent": "meigsgold"
+ },
+ {
+  "child": "meigsog",
+  "parent": "aogpsm"
+ },
+ {
+  "child": "icygrape",
+  "parent": "zpp"
+ },
+ {
+  "child": "icygrape",
+  "parent": "blackdomina"
+ },
+ {
+  "child": "zpp",
+  "parent": "zkittlez"
+ },
+ {
+  "child": "zpp",
+  "parent": "purplepunch"
+ },
+ {
+  "child": "aogpsm",
+  "parent": "ancientog",
+  "kind": "sel"
+ },
+ {
+  "child": "ancientog",
+  "parent": "iran"
+ },
+ {
+  "child": "ancientog",
+  "parent": "snowlotus"
+ },
+ {
+  "child": "goldenputang",
+  "parent": "goldenpineapple"
+ },
+ {
+  "child": "goldenputang",
+  "parent": "putang"
+ },
+ {
+  "child": "putang",
+  "parent": "starpupil"
+ },
+ {
+  "child": "putang",
+  "parent": "tangie"
+ },
+ {
+  "child": "starpupil",
+  "parent": "thai"
+ },
+ {
+  "child": "starpupil",
+  "parent": "afghanipak"
+ },
+ {
+  "child": "afghanipak",
+  "parent": "afghani"
+ },
+ {
+  "child": "afghanipak",
+  "parent": "pakistani"
+ },
+ {
+  "child": "wmhp",
+  "parent": "chem91"
+ },
+ {
+  "child": "wmhp",
+  "parent": "wmhpparent"
+ },
+ {
+  "child": "valedictorian",
+  "parent": "starpupil"
+ },
+ {
+  "child": "valedictorian",
+  "parent": "weaponx"
+ },
+ {
+  "child": "weaponx",
+  "parent": "mendopurps"
+ },
+ {
+  "child": "weaponx",
+  "parent": "pakistani"
+ },
+ {
+  "child": "medipak",
+  "parent": "medihaze"
+ },
+ {
+  "child": "medipak",
+  "parent": "swabi"
+ },
+ {
+  "child": "goldenpineapple",
+  "parent": "c99"
+ },
+ {
+  "child": "goldenpineapple",
+  "parent": "whitewidow"
+ },
+ {
+  "child": "bluetuna",
+  "parent": "bluedream"
+ },
+ {
+  "child": "bluetuna",
+  "parent": "tunakush"
+ },
+ {
+  "child": "bluedream",
+  "parent": "blueberry"
+ },
+ {
+  "child": "bluedream",
+  "parent": "haze"
+ },
+ {
+  "child": "moneytree",
+  "parent": "gg4"
+ },
+ {
+  "child": "moneytree",
+  "parent": "jillybean"
+ },
+ {
+  "child": "jillybean",
+  "parent": "orangevelvet"
+ },
+ {
+  "child": "jillybean",
+  "parent": "spacequeen"
+ },
+ {
+  "child": "spacequeen",
+  "parent": "romulan"
+ },
+ {
+  "child": "spacequeen",
+  "parent": "c99"
+ },
+ {
+  "child": "fishsticks",
+  "parent": "bluetuna"
+ },
+ {
+  "child": "fishsticks",
+  "parent": "icyog"
+ },
+ {
+  "child": "bubblepak",
+  "parent": "bubblegum"
+ },
+ {
+  "child": "bubblepak",
+  "parent": "medipak"
+ }
+]

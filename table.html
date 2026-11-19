@@ -32,8 +32,9 @@
 
 </div>
 
-<script src="data.js"></script>
+<script src="data-loader.js"></script>
 <script>
+loadData().then(function(){
 const tb=document.getElementById('tbody');
 const row=n=>'<tr><td><b><a href="index.html#'+encodeURIComponent(n.id)+'">'+esc(n.label)+'</a></b></td><td>'+esc(n.breeder)+'</td><td class="m">'+esc(n.cross)+'</td><td>'+esc(n.ft||'Not listed')+'</td><td>'+esc(n.aroma||'Not listed')+'</td></tr>';
 const heads=[...document.querySelectorAll('th[aria-sort]')];
@@ -50,6 +51,8 @@ function render(){
 }
 heads.forEach(h=>h.firstChild.onclick=()=>{const k=h.firstChild.dataset.k;if(sk===k)dir=-dir;else{sk=k;dir=1}render()});
 render();
+
+});
 </script>
 </body>
 </html>

@@ -14,7 +14,7 @@ Handoff notes for Claude Code. This is a family-tree site for Andrew's cannabis 
 
 - **Stay hidden from search:** keep `<meta name="robots" content="noindex, nofollow, noarchive">` and `<meta name="referrer" content="no-referrer">` in `<head>`
 - **Don't link or publicize** the repo or the page
-- **Static site, no build:** `data.js` (data + shared model), `style.css`, pages `index.html`, `table.html`, `breeding.html`. The only external script is dagre 0.8.5 from cdnjs, plus Google Fonts.
+- **Static site, no build:** `data/*.json + data-loader.js` (data + shared model), `style.css`, pages `index.html`, `table.html`, `breeding.html`. The only external script is dagre 0.8.5 from cdnjs, plus Google Fonts.
 - **Layout:** must work at phone width, about 400px. The page never scrolls sideways; the tree scrolls inside its own `.scroller` box.
 - **Light and dark themes:** every color is a CSS variable on `:root`, redefined for dark mode
 
