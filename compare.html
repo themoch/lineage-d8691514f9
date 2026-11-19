@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Compare Strains</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">Side by side</div>
+  <h1>Compare strains</h1>
+  <p>Pick two strains to see their pedigrees merged into one graph, what ancestry they share, and their specs next to each other.</p>
+  <nav class="pages" aria-label="Pages"><a href="index.html">Lineage web</a><a href="table.html">Lineage table</a><a href="breeding.html">Breeding read</a><a href="compare.html" aria-current="page">Compare</a></nav>
+</header>
+
+<div class="cmpbar">
+  <label class="cmpsel a"><span>Strain A</span><select id="sa"></select></label>
+  <button class="btn" id="swap" type="button" aria-label="Swap A and B">&#8646; Swap</button>
+  <label class="cmpsel b"><span>Strain B</span><select id="sb"></select></label>
+  <button class="btn" id="copylink" type="button">Copy link</button>
+</div>
+
+<div id="empty" class="panel" hidden><p class="hint">Choose a second strain to compare.</p></div>
+
+<div id="out" hidden>
+  <div class="bar">
+    <div class="legend">
+      <span><i class="sw" style="background:var(--ca-bg);border-color:var(--ca)"></i><b id="lga"></b> only</span>
+      <span><i class="sw" style="background:var(--cb-bg);border-color:var(--cb)"></i><b id="lgb"></b> only</span>
+      <span><i class="sw" style="background:var(--surface);border-color:var(--shared)"></i>Shared ancestor</span>
+    </div>
+    <div class="btns"><button class="btn" id="zout" type="button" aria-label="Zoom out">−</button><button class="btn" id="zin" type="button" aria-label="Zoom in">+</button><button class="btn" id="zfit" type="button">Fit width</button></div>
+  </div>
+
+  <div class="stage" style="margin-top:12px"><div class="stagehead"><span id="viewtitle"></span><span class="note" id="viewsub"></span></div><div class="scroller" id="scroller"><svg id="g" role="img" aria-label="Merged lineage graph"></svg></div></div>
+
+  <div class="grid2" style="margin-top:20px">
+    <section class="panel" id="stats" aria-live="polite"></section>
+    <section class="panel" id="specs"></section>
+  </div>
+</div>
+</div>
+
+<script src="data-loader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
+<script>
+loadData().then(function(){
+let A=null,B=null,scale=null,lastLayout=null;
+const sa=document.getElementById('sa'),sb=document.getElementById('sb'),svg=document.getElementById('g'),scroller=document.getElementById('scroller');
+const $=id=>document.getElementById(id);
+const ids=N.map(n=>n.id);
+// options: collection strains grouped by breeder, then everything else
+function opts(){
+  let h='<option value="">Choose a strain…</option>';
+  [...new Set(mine.map(m=>byId[m].breeder))].forEach(br=>{
+    h+='<optgroup label="'+esc(br)+'">'+mine.filter(m=>byId[m].breeder===br).map(m=>'<option value="'+m+'">'+esc(byId[m].label)+'</option>').join('')+'</optgroup>';
+  });
+  const rest=ids.filter(i=>!byId[i].mine).sort((x,y)=>byId[x].label.localeCompare(byId[y].label));
+  h+='<optgroup label="Ancestors">'+rest.map(m=>'<option value="'+m+'">'+esc(byId[m].label)+'</option>').join('')+'</optgroup>';
+  return h;
+}
+sa.innerHTML=sb.innerHTML=opts();
+
+// state: hash "a~b"; localStorage remembers last pair
+const ok=v=>v&&byId[v]?v:null;
+function fromHash(){try{const raw=decodeURIComponent(location.hash.slice(1));if(!raw)return null;const i=raw.indexOf('~');return i<0?{a:ok(raw),b:null}:{a:ok(raw.slice(0,i)),b:ok(raw.slice(i+1))}}catch(e){return null}}
+function setHash(push){try{const u='#'+(A?encodeURIComponent(A):'')+'~'+(B?encodeURIComponent(B):'');if(u===location.hash)return;(push?history.pushState:history.replaceState).call(history,null,'',u)}catch(e){}
+  try{if(A&&B)localStorage.setItem('lw-cmp',A+'~'+B)}catch(e){}}
+function init(){
+  const h=fromHash();
+  if(h){A=h.a;B=h.b}
+  else{try{const s=(localStorage.getItem('lw-cmp')||'').split('~');A=ok(s[0]);B=ok(s[1])}catch(e){}}
+  if(!A&&!B){A=mine[0];B=mine[1]||null}
+}
+
+function path(pts){
+  if(pts.length<3)return 'M'+pts[0].x+','+pts[0].y+' L'+pts[pts.length-1].x+','+pts[pts.length-1].y;
+  let d='M'+pts[0].x+','+pts[0].y;
+  for(let i=1;i<pts.length-1;i++){const m={x:(pts[i].x+pts[i+1].x)/2,y:(pts[i].y+pts[i+1].y)/2};d+=' Q'+pts[i].x+','+pts[i].y+' '+(i===pts.length-2?pts[i+1].x+','+pts[i+1].y:m.x+','+m.y)}
+  return d;
+}
+
+function draw(){
+  const upA=new Set([A,...up(A)]),upB=new Set([B,...up(B)]);
+  const vis=new Set([...upA,...upB]);
+  const g=new dagre.graphlib.Graph();
+  g.setGraph({rankdir:'TB',nodesep:20,ranksep:50,edgesep:10,marginx:8,marginy:8,ranker:'longest-path'});
+  g.setDefaultEdgeLabel(()=>({}));
+  vis.forEach(id=>{const n=byId[id];g.setNode(id,{width:Math.round(n.label.length*7.6+28),height:id===A||id===B?38:30})});
+  E.forEach(([c,p,k])=>{if(vis.has(c)&&vis.has(p))g.setEdge(p,c,{k:k||'cross'})});
+  dagre.layout(g);lastLayout=g;
+  const W=Math.ceil(g.graph().width),H=Math.ceil(g.graph().height);
+  if(scale===null)scale=Math.min(1,Math.max(.6,(scroller.clientWidth-32)/W));
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.setAttribute('width',Math.round(W*scale));svg.setAttribute('height',Math.round(H*scale));
+  const side=id=>upA.has(id)&&upB.has(id)?'sh':upA.has(id)?'a':'b';
+  let out='<defs>'+['','a','b'].map(s=>'<marker id="ar'+s+'" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="arrow '+s+'" d="M0,0 L10,5 L0,10 z"/></marker>').join('')+'</defs>';
+  g.edges().forEach(e=>{const o=g.edge(e);const s=side(e.w);const c=s==='sh'?'':s;
+    out+='<path class="e '+(o.k!=='cross'?o.k:'')+' '+(c?'c'+c:'')+'" d="'+path(o.points)+'" marker-end="url(#ar'+c+')"/>'});
+  g.nodes().forEach(id=>{const o=g.node(id),n=byId[id];const x=o.x-o.width/2,y=o.y-o.height/2;
+    const cls='n cmp '+side(id)+(id===A?' isA':'')+(id===B?' isB':'');
+    out+='<g class="'+cls+'" data-id="'+id+'" tabindex="0" role="link" aria-label="'+esc(n.label)+' ('+(side(id)==='sh'?'shared':side(id)==='a'?'A only':'B only')+')"><rect x="'+x+'" y="'+y+'" width="'+o.width+'" height="'+o.height+'" rx="7"/><text x="'+o.x+'" y="'+o.y+'">'+esc(n.label)+'</text></g>'});
+  svg.innerHTML=out;
+  $('viewtitle').textContent=byId[A].label+' vs '+byId[B].label;
+  $('viewsub').textContent=vis.size+' strains. Tap a box to open its own tree.';
+  $('lga').textContent=byId[A].label;$('lgb').textContent=byId[B].label;
+}
+
+function stats(){
+  const upA=up(A),upB=up(B);
+  // a strain that is itself an ancestor of the other counts as shared
+  const sA=new Set([A,...upA]),sB=new Set([B,...upB]);
+  const common=[...sA].filter(x=>sB.has(x));
+  const onlyA=[...sA].filter(x=>!sB.has(x)).length,onlyB=[...sB].filter(x=>!sA.has(x)).length;
+  const fA=founders(A),fB=founders(B);
+  const keys=new Set([...Object.keys(fA),...Object.keys(fB)]);
+  let ov=0;const rows=[];
+  keys.forEach(k=>{const m=Math.min(fA[k]||0,fB[k]||0);ov+=m;if(m>0)rows.push([k,fA[k]||0,fB[k]||0,m])});
+  rows.sort((x,y)=>y[3]-x[3]);
+  const pct=v=>Math.round(v*100)+'%';
+  const rel=sB.has(A)&&A!==B?esc(byId[A].label)+' is an ancestor of '+esc(byId[B].label)+'.':sA.has(B)&&A!==B?esc(byId[B].label)+' is an ancestor of '+esc(byId[A].label)+'.':'';
+  let h='<h2>Shared ancestry</h2>';
+  if(A===B)h+='<p class="hint">Same strain on both sides.</p>';
+  if(rel)h+='<p>'+rel+'</p>';
+  if(!common.length){h+='<p>No shared ancestry in the data. These two trees never meet, though dead ends (parents unknown) could hide overlap.</p>'}
+  else{
+    h+='<div class="ovr"><div class="ovnum">'+pct(ov)+'</div><div class="note">genetic overlap, by founder share (100% = identical pedigree)</div></div>';
+    h+='<dl><dt>Common ancestors</dt><dd>'+common.length+'</dd><dt>Only '+esc(byId[A].label)+'</dt><dd>'+onlyA+'</dd><dt>Only '+esc(byId[B].label)+'</dt><dd>'+onlyB+'</dd></dl>';
+    h+='<h3 class="parh">Shared founders</h3><div class="bars">'+rows.slice(0,12).map(([k,a,b,m])=>'<div class="brow"><span>'+esc(byId[k].label)+'</span><div class="dtrack" title="A '+pct(a)+' / B '+pct(b)+'"><div class="dfill a" style="width:'+Math.min(100,a*100)+'%"></div><div class="dfill b" style="width:'+Math.min(100,b*100)+'%"></div></div><span class="num">'+pct(m)+'</span></div>').join('')+'</div>';
+    if(rows.length>12)h+='<p class="note">+ '+(rows.length-12)+' more founders with smaller shared shares.</p>';
+    h+='<h3 class="parh">All common ancestors</h3><p class="note">'+common.map(x=>esc(byId[x].label)).join(', ')+'</p>';
+  }
+  $('stats').innerHTML=h;
+}
+
+function specs(){
+  const a=specVals(A),b=specVals(B);
+  const rows=[['cross','Cross'],['breeder','Breeder'],...SPEC].map(([k,l])=>{
+    const get=(id,sv)=>k==='cross'||k==='breeder'?byId[id][k]:sv[k];
+    const x=get(A,a),y=get(B,b);if(!x&&!y)return '';
+    const diff=(x||'').trim().toLowerCase()!==(y||'').trim().toLowerCase();
+    return '<tr'+(diff?' class="diff"':'')+'><th scope="row">'+l+'</th><td>'+(x?esc(x):'<span class="hint">&mdash;</span>')+'</td><td>'+(y?esc(y):'<span class="hint">&mdash;</span>')+'</td></tr>';
+  }).join('');
+  $('specs').innerHTML='<h2>Specs</h2><table class="spec cmptbl"><thead><tr><th></th><th class="ha">'+esc(byId[A].label)+'</th><th class="hb">'+esc(byId[B].label)+'</th></tr></thead><tbody>'+rows+'</tbody></table><p class="note">Highlighted rows differ.</p>';
+}
+
+function render(){
+  sa.value=A||'';sb.value=B||'';
+  const ready=A&&B;
+  $('out').hidden=!ready;$('empty').hidden=!!ready;
+  document.title=ready?byId[A].label+' vs '+byId[B].label:'Compare Strains';
+  if(!ready)return;
+  draw();stats();specs();
+}
+function pick(a,b,push=true){A=a||null;B=b||null;scale=null;setHash(push);render()}
+sa.onchange=()=>pick(sa.value,B);
+sb.onchange=()=>pick(A,sb.value);
+$('swap').onclick=()=>pick(B,A);
+function open(id){location.href='index.html#'+encodeURIComponent(id)}
+svg.addEventListener('click',e=>{const t=e.target.closest('.n');if(t)open(t.dataset.id)});
+svg.addEventListener('keydown',e=>{const t=e.target.closest('.n');if(t&&(e.key==='Enter'||e.key===' ')){e.preventDefault();open(t.dataset.id)}});
+$('zin').onclick=()=>{scale=Math.min(1.6,(scale||1)*1.2);draw()};
+$('zout').onclick=()=>{scale=Math.max(.2,(scale||1)/1.2);draw()};
+$('zfit').onclick=()=>{scale=Math.min(1.2,(scroller.clientWidth-32)/lastLayout.graph().width);draw()};
+$('copylink').onclick=async e=>{
+  const b=e.currentTarget,u=location.href.split('#')[0]+'#'+encodeURIComponent(A||'')+'~'+encodeURIComponent(B||'');
+  try{await navigator.clipboard.writeText(u);b.textContent='Copied'}
+  catch(_){const t=document.createElement('textarea');t.value=u;document.body.appendChild(t);t.select();try{document.execCommand('copy');b.textContent='Copied'}catch(__){b.textContent='Press Ctrl/Cmd+C'}t.remove()}
+  setTimeout(()=>b.textContent='Copy link',1800)};
+addEventListener('hashchange',()=>{const h=fromHash();if(!h)return;A=h.a;B=h.b;scale=null;render()});
+let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(A&&B){scale=null;draw()}},200)});
+init();setHash(false);render();
+});
+</script>
+</body>
+</html>

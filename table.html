@@ -18,13 +18,13 @@
   <div class="kicker">40 strains · 12 breeders</div>
   <h1>Lineage table</h1>
   <p>Every strain in your collection with its breeder, cross, flower time and aroma.</p>
-  <nav class="pages" aria-label="Pages"><a href="index.html">Lineage web</a><a href="table.html" aria-current="page">Lineage table</a><a href="breeding.html">Breeding read</a></nav>
+  <nav class="pages" aria-label="Pages"><a href="index.html">Lineage web</a><a href="table.html" aria-current="page">Lineage table</a><a href="breeding.html">Breeding read</a><a href="compare.html">Compare</a></nav>
 </header>
 
 <section class="panel">
   <h2>Lineage table</h2>
   <div class="tablewrap"><table>
-    <thead><tr><th aria-sort="none"><button type="button" class="sort" data-k="label">Strain</button></th><th aria-sort="none"><button type="button" class="sort" data-k="breeder">Breeder</button></th><th aria-sort="none"><button type="button" class="sort" data-k="cross">Cross</button></th><th aria-sort="none"><button type="button" class="sort" data-k="ft">Flower</button></th><th aria-sort="none"><button type="button" class="sort" data-k="aroma">Aroma</button></th></tr></thead>
+    <thead><tr><th aria-sort="none"><button type="button" class="sort" data-k="label">Strain</button></th><th aria-sort="none"><button type="button" class="sort" data-k="breeder">Breeder</button></th><th aria-sort="none"><button type="button" class="sort" data-k="cross">Cross</button></th><th aria-sort="none"><button type="button" class="sort" data-k="ft">Flower</button></th><th aria-sort="none"><button type="button" class="sort" data-k="aroma">Aroma</button></th><th></th></tr></thead>
     <tbody id="tbody"></tbody>
   </table></div>
   <p class="note">Notes: "Crazy Haze" is listed by Archive as Crazy Hazey. "Oishi" is Oishii. Circle Jerk has no Archive page; its cross comes from a resale listing. Biscotti is a Cookies strain, not an Archive release. Flavor Pack lineage is from SeedFinder and not confirmed by Archive. Golden Pineapple: you listed (C99 x White Widow) x PuTang, but SeedFinder lists Golden Pineapple as C99 x White Widow and Golden PuTang as Golden Pineapple x PuTang; the tree follows SeedFinder. Medusa follows your note (Pure Kush x Mendo Breath), not Nirvana's Medusa. Cross of the Titans is a Bred by 42 strain: Best Shit Ever x Clash of the Titans. White Truffle, GG4, Mendo Breath, Peanut Butter Breath and Jilly Bean parents are widely reported rather than breeder-confirmed.</p>
@@ -36,7 +36,7 @@
 <script>
 loadData().then(function(){
 const tb=document.getElementById('tbody');
-const row=n=>'<tr><td><b><a href="index.html#'+encodeURIComponent(n.id)+'">'+esc(n.label)+'</a></b></td><td>'+esc(n.breeder)+'</td><td class="m">'+esc(n.cross)+'</td><td>'+esc(n.ft||'Not listed')+'</td><td>'+esc(n.aroma||'Not listed')+'</td></tr>';
+const row=n=>'<tr><td><b><a href="index.html#'+encodeURIComponent(n.id)+'">'+esc(n.label)+'</a></b></td><td>'+esc(n.breeder)+'</td><td class="m">'+esc(n.cross)+'</td><td>'+esc(n.ft||'Not listed')+'</td><td>'+esc(n.aroma||'Not listed')+'</td><td><a href="compare.html#'+encodeURIComponent(n.id)+'~">Compare</a></td></tr>';
 const heads=[...document.querySelectorAll('th[aria-sort]')];
 let sk=null,dir=1;
 function render(){

@@ -109,3 +109,31 @@ td.m{font-family:var(--f-mono);font-size:12.5px}
 .sort::after{content:"\2195";opacity:.4}
 th[aria-sort=ascending] .sort::after{content:"\25B2";opacity:1}
 th[aria-sort=descending] .sort::after{content:"\25BC";opacity:1}
+
+/* compare page */
+:root{--ca:#2f6fb3;--ca-bg:#dbe8f6;--cb:#b5521f;--cb-bg:#f6e2d6;--shared:#7a8a7b}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ca:#6fa8e6;--ca-bg:#1c2b3e;--cb:#e0844f;--cb-bg:#3a2619;--shared:#8d9a8e}}
+:root[data-theme="dark"]{--ca:#6fa8e6;--ca-bg:#1c2b3e;--cb:#e0844f;--cb-bg:#3a2619;--shared:#8d9a8e}
+.cmpbar{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:flex-end}
+.cmpsel{display:grid;gap:4px;flex:1 1 220px;min-width:0}
+.cmpsel span{font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
+.cmpsel.a span{color:var(--ca)} .cmpsel.b span{color:var(--cb)}
+.cmpsel select{font:500 14px var(--f-body);padding:8px 10px;border-radius:6px;border:2px solid var(--line);background:var(--surface);color:var(--ink);width:100%}
+.cmpsel.a select{border-color:var(--ca)} .cmpsel.b select{border-color:var(--cb)}
+.cmpbar .btn{padding:9px 12px}
+.n.cmp.a rect{fill:var(--ca-bg);stroke:var(--ca)} .n.cmp.b rect{fill:var(--cb-bg);stroke:var(--cb)}
+.n.cmp.sh rect{fill:var(--surface);stroke:var(--shared)} .n.cmp.sh text{fill:var(--ink)}
+.n.cmp.isA rect{fill:var(--ca);stroke:var(--ca);stroke-width:2.5} .n.cmp.isB rect{fill:var(--cb);stroke:var(--cb);stroke-width:2.5}
+.n.cmp.isA text,.n.cmp.isB text{fill:#fff;font-weight:600}
+.e.ca{stroke:var(--ca)} .e.cb{stroke:var(--cb)} .arrow.a{fill:var(--ca)} .arrow.b{fill:var(--cb)}
+.ovr{display:flex;align-items:baseline;gap:12px;margin:6px 0 4px}
+.ovnum{font:700 38px var(--f-display);line-height:1}
+.dtrack{height:10px;position:relative;background:var(--bg);border-radius:5px;overflow:hidden}
+.dfill{position:absolute;left:0;height:50%;border-radius:0 3px 3px 0}
+.dfill.a{top:0;background:var(--ca)} .dfill.b{bottom:0;background:var(--cb)}
+table.cmptbl{table-layout:fixed}
+table.cmptbl th:first-child{width:22%}
+table.cmptbl thead th{font:600 13px var(--f-display);letter-spacing:0;text-transform:none;border-top:0}
+table.cmptbl th.ha{color:var(--ca)} table.cmptbl th.hb{color:var(--cb)}
+table.cmptbl{min-width:0}
+table.cmptbl tr.diff td,table.cmptbl tr.diff th{background:color-mix(in srgb,var(--hl) 10%,transparent)}
