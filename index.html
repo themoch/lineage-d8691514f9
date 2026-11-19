@@ -20,7 +20,7 @@
   <div class="kicker">40 strains · 12 breeders · traced to founders</div>
   <h1>Collection Lineage Web</h1>
   <p>Each tree reads top to bottom: oldest ancestors first, your strain last. Pick a strain to see its pedigree, tap a breeder name to see that breeder's web, or open the full web to see how everything connects. Tap any box to jump to that strain's own tree.</p>
-<nav class="pages" aria-label="Pages"><a href="index.html" aria-current="page">Lineage web</a><a href="table.html">Lineage table</a><a href="breeding.html">Breeding read</a></nav>
+<nav class="pages" aria-label="Pages"><a href="index.html" aria-current="page">Lineage web</a><a href="table.html">Lineage table</a><a href="breeding.html">Breeding read</a><a href="compare.html">Compare</a></nav>
 </header>
 
 <div class="chips" id="chips" role="group" aria-label="Your strains"></div>
@@ -52,7 +52,6 @@
 <script>
 loadData().then(function(){
 const SVGNS='http://www.w3.org/2000/svg';
-function up(id,s=new Set()){(par[id]||[]).forEach(x=>{if(!s.has(x.p)){s.add(x.p);up(x.p,s)}});return s}
 function down(id,s=new Set()){(kids[id]||[]).forEach(c=>{if(!s.has(c)){s.add(c);down(c,s)}});return s}
 const isDead=id=>byId[id].src==='unknown'&&!par[id];
 const isWeb=()=>view==='all'||view.startsWith('b:');
@@ -125,12 +124,9 @@ document.getElementById('zfit').onclick=()=>{const W=lastLayout.graph().width;sc
 document.getElementById('dead').onchange=e=>{showDead=e.target.checked;try{localStorage.setItem('lw-dead',showDead?'1':'0')}catch(_){}scale=null;draw()};
 
 const tagFor=s=>s==='own'?['Your cross','var(--own)']:s==='archive'?['Archive','var(--archive-line)']:s==='offsite'?['Other breeder','var(--offsite-line)']:['Parents unknown','var(--unknown-line)'];
-const SPEC=[['type','Type'],['seed','Seed type'],['flower','Flower time'],['height','Height / stretch'],['yield','Yield'],['potency','THC / CBD'],['aroma','Aroma / flavor'],['blurb','About'],['grow','Grow conditions'],['notes','Your notes'],['conflict','Sources disagree']];
 function specTable(n){
-  const d=Object.assign({},D[n.id]);
-  if(!d.flower&&n.ft)d.flower=n.ft;
-  if(!d.aroma&&n.aroma)d.aroma=n.aroma;
-  const rows=SPEC.filter(([k])=>d[k]&&!/^not listed$/i.test(d[k])).map(([k,l])=>'<tr><th scope="row">'+l+'</th><td>'+esc(d[k])+'</td></tr>');
+  const d=specVals(n.id);
+  const rows=SPEC.filter(([k])=>d[k]).map(([k,l])=>'<tr><th scope="row">'+l+'</th><td>'+esc(d[k])+'</td></tr>');
   return rows.length?'<table class="spec"><tbody>'+rows.join('')+'</tbody></table>':'';
 }
 function detail(id){
@@ -144,7 +140,7 @@ function detail(id){
     return '<details class="par"><summary>'+esc(p.label)+(x.k==='sel'?' (selection)':x.k==='dash'?' (unconfirmed)':'')+(t?'':' <span class="hint">no data</span>')+'</summary>'+
     (p.cross?'<div class="cross">'+esc(p.cross)+'</div>':'')+t+(D[p.id]&&D[p.id].src?'<div class="url">'+esc(D[p.id].src)+'</div>':'')+
     '<button class="btn" type="button" data-go="'+p.id+'" style="margin:8px 0 0">Open '+esc(p.label)+'</button></details>'}).join('');
-  el.innerHTML='<h2>'+(depth()>0?'<button class="btn" type="button" id="goback" style="font-size:12px;vertical-align:middle">\u2190 Back</button> ':'')+esc(n.label)+' <button class="btn" type="button" id="copylink" style="font-size:12px;vertical-align:middle">Copy link</button></h2><span class="tag" style="color:'+c+';border-color:'+c+'">'+t+'</span>'+(n.breeder?' <span class="tag" style="color:var(--muted);border-color:var(--line)">'+esc(n.breeder)+'</span>':'')+(n.mine?' <span class="tag" style="color:var(--mine);border-color:var(--mine)">In your collection</span>':'')+
+  el.innerHTML='<h2>'+(depth()>0?'<button class="btn" type="button" id="goback" style="font-size:12px;vertical-align:middle">\u2190 Back</button> ':'')+esc(n.label)+' <button class="btn" type="button" id="copylink" style="font-size:12px;vertical-align:middle">Copy link</button> <a class="btn" href="compare.html#'+encodeURIComponent(id)+'~" style="font-size:12px;vertical-align:middle;text-decoration:none">Compare with…</a></h2><span class="tag" style="color:'+c+';border-color:'+c+'">'+t+'</span>'+(n.breeder?' <span class="tag" style="color:var(--muted);border-color:var(--line)">'+esc(n.breeder)+'</span>':'')+(n.mine?' <span class="tag" style="color:var(--mine);border-color:var(--mine)">In your collection</span>':'')+
   '<div class="cross">'+esc(n.cross||ps||'No parents listed')+'</div>'+specTable(n)+(pk?'<h3 class="parh">Parents</h3>'+pk:'')+'<dl>'+
   (ps?'<dt>Parents</dt><dd>'+esc(ps)+'</dd>':'')+
   '<dt>Ancestors</dt><dd>'+a.size+(founders.length?' · founders: '+esc(founders.join(', ')):'')+'</dd>'+
