@@ -60,7 +60,7 @@ const ids=N.map(n=>n.id);
 // options: collection strains grouped by breeder, then everything else
 function opts(){
   let h='<option value="">Choose a strain…</option>';
-  [...new Set(mine.map(m=>byId[m].breeder))].forEach(br=>{
+  [...new Set(mine.map(m=>byId[m].breeder))].sort((a,b)=>a.localeCompare(b)).forEach(br=>{
     h+='<optgroup label="'+esc(br)+'">'+mine.filter(m=>byId[m].breeder===br).map(m=>'<option value="'+m+'">'+esc(byId[m].label)+'</option>').join('')+'</optgroup>';
   });
   const rest=ids.filter(i=>!byId[i].mine).sort((x,y)=>byId[x].label.localeCompare(byId[y].label));
@@ -117,7 +117,7 @@ function stats(){
   const upA=up(A),upB=up(B);
   // a strain that is itself an ancestor of the other counts as shared
   const sA=new Set([A,...upA]),sB=new Set([B,...upB]);
-  const common=[...sA].filter(x=>sB.has(x));
+  const common=[...sA].filter(x=>sB.has(x)).sort((x,y)=>byId[x].label.localeCompare(byId[y].label));
   const onlyA=[...sA].filter(x=>!sB.has(x)).length,onlyB=[...sB].filter(x=>!sA.has(x)).length;
   const fA=founders(A),fB=founders(B);
   const keys=new Set([...Object.keys(fA),...Object.keys(fB)]);

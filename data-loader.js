@@ -10,7 +10,7 @@ function loadData(){
     window.byId=Object.fromEntries(strains.map(n=>[n.id,{id:n.id,label:n.label,src:n.source,mine:!!n.mine,ft:n.flower,aroma:n.aroma,cross:n.cross,url:n.url,breeder:n.breeder||''}]));
     const par=window.par={},kids=window.kids={};
     window.E.forEach(([c,p,k])=>{(par[c]=par[c]||[]).push({p,k:k||'cross'});(kids[p]=kids[p]||[]).push(c)});
-    window.mine=strains.filter(n=>n.mine).map(n=>n.id);
+    window.mine=strains.filter(n=>n.mine).sort((a,b)=>a.label.localeCompare(b.label)).map(n=>n.id);
     // shared helpers: ancestor set, founder fractions, spec fields merged with strain fallbacks
     window.up=function up(id,s=new Set()){(window.par[id]||[]).forEach(x=>{if(!s.has(x.p)){s.add(x.p);up(x.p,s)}});return s};
     const memo={};

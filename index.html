@@ -134,8 +134,8 @@ function detail(id){
   if(!id){el.innerHTML='<h2>Pick a strain</h2><p class="hint">Tap a box in the web to trace its lineage. Its cross, flower time, aroma and source show here.</p>';return}
   const n=byId[id];const [t,c]=tagFor(n.src);const a=up(id),d=down(id);
   const ps=(par[id]||[]).map(x=>byId[x.p].label+(x.k==='sel'?' (selection)':x.k==='dash'?' (unconfirmed)':'')).join(' x ');
-  const myDown=[...d].filter(x=>byId[x].mine);
-  const founders=[...a].filter(x=>!par[x]).map(x=>byId[x].label);
+  const myDown=[...d].filter(x=>byId[x].mine).sort((x,y)=>byId[x].label.localeCompare(byId[y].label));
+  const founders=[...a].filter(x=>!par[x]).map(x=>byId[x].label).sort((a,b)=>a.localeCompare(b));
   const pk=(par[id]||[]).map(x=>{const p=byId[x.p];const t=specTable(p);
     return '<details class="par"><summary>'+esc(p.label)+(x.k==='sel'?' (selection)':x.k==='dash'?' (unconfirmed)':'')+(t?'':' <span class="hint">no data</span>')+'</summary>'+
     (p.cross?'<div class="cross">'+esc(p.cross)+'</div>':'')+t+(D[p.id]&&D[p.id].src?'<div class="url">'+esc(D[p.id].src)+'</div>':'')+
@@ -157,7 +157,7 @@ function detail(id){
 const chips=document.getElementById('chips');
 const mk=(id,label,cls,parent)=>{const b=document.createElement('button');b.className='chip'+(cls?' '+cls:'');b.type='button';b.dataset.id=id;b.id='chip-'+id.replace(/[^a-z0-9]/gi,'_');b.textContent=label;b.onclick=()=>setView(id);parent.appendChild(b);return b};
 const top=document.createElement('div');top.className='chiprow';chips.appendChild(top);mk('all','Full web','all',top);
-const breeders=[...new Set(mine.map(m=>byId[m].breeder))];
+const breeders=[...new Set(mine.map(m=>byId[m].breeder))].sort((a,b)=>a.localeCompare(b));
 breeders.forEach(br=>{const row=document.createElement('div');row.className='chiprow';const h=mk('b:'+br,br,'brd',row);h.title='Show the '+br+' web';
   mine.filter(m=>byId[m].breeder===br).forEach(id=>mk(id,byId[id].label,'',row));chips.appendChild(row)});
 addEventListener('hashchange',()=>{const h=fromHash();if(!h)return;if(h.v!==view)setView(h.v);if(isWeb()&&h.h!==hlId){hlId=h.h;draw();detail(h.h)}});
